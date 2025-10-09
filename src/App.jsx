@@ -1,9 +1,9 @@
-import AppLayout from './components/AppLayout'
-import LandingPage from './pages/LandingPage'
+import AppLayout from './components/AppLayout.jsx'
+import LandingPage from './pages/LandingPage.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Contact from './pages/Contact'
-import About from './pages/About'
-import Menu from './pages/Menu'
+import Contact from './pages/Contact.jsx'
+import About from './pages/About.jsx'
+import Menu from './pages/Menu.jsx'
 
 const App = () => {
     return (
