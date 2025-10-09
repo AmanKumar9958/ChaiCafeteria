@@ -1,5 +1,5 @@
 import AppLayout from './components/AppLayout.jsx'
-import LandingPage from './pages/LandingPage.jsx'
+import Home from './pages/Home.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Contact from './pages/Contact.jsx'
 import About from './pages/About.jsx'
@@ -10,7 +10,7 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route element={<AppLayout />}>
-                    <Route path='/' element={<LandingPage />} />
+                    <Route path='/' element={<Home />} />
                     <Route path='/about' element={<About />} />
                     <Route path='/contact' element={<Contact />} />
                     <Route path='/menu' element={<Menu />} />
