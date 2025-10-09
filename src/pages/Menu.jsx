@@ -4,45 +4,44 @@ import { FaPepperHot, FaGlassMartini, FaHamburger, FaUtensils } from 'react-icon
 
 // --- MENU DATA (No changes here) ---
 const menuData = {
-  chowmein: {
-    name: 'Chowmein',
+  chilli: {
+    name: 'Chilli',
     icon: FaPepperHot,
     items: [
-      { name: 'Veg Chowmein', price: '₹120', description: 'Stir-fried noodles with fresh, crisp vegetables.', imgSrc: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=1292' },
-      { name: 'Egg Chowmein', price: '₹140', description: 'A classic favorite with scrambled egg and veggies.', imgSrc: 'https://images.unsplash.com/photo-1626728092363-428de03c94a7?q=80&w=1287' },
-      { name: 'Chicken Hakka Noodles', price: '₹180', description: 'Spicy noodles with tender chicken pieces.', imgSrc: 'https://images.unsplash.com/photo-1626728014454-76615b1e102b?q=80&w=1287' },
-      { name: 'Prawn Schezwan Noodles', price: '₹220', description: 'Fiery schezwan noodles loaded with juicy prawns.', imgSrc: 'https://images.unsplash.com/photo-1563245362-d7b1a6a6a0e8?q=80&w=1287' },
+      { name: 'Chicken chilli (bone)', imgSrc: 'images/chicken_chilli_bone.jpg' },
+      { name: 'Chicken chilli (boneless)', imgSrc: 'images/chicken_chilli_boneless.jpg' },
+      { name: 'Baby corn chilli', imgSrc: 'images/chilli_baby_corn.jpg' },
+      { name: 'Chilli Paneer', imgSrc: 'images/chilli_paneer.jpg' },
     ]
   },
   burgers: {
     name: 'Burgers',
     icon: FaHamburger,
     items: [
-      { name: 'Aloo Tikki Burger', price: '₹90', description: 'A crispy potato patty with our special tangy sauce.', imgSrc: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1472' },
-      { name: 'Spicy Paneer Burger', price: '₹150', description: 'Grilled paneer steak with a fiery tandoori marinade.', imgSrc: 'https://images.unsplash.com/photo-1603614568433-8c4e16107513?q=80&w=1470' },
-      { name: 'Chicken Zinger Burger', price: '₹200', description: 'Extra crispy chicken fillet with lettuce and mayo.', imgSrc: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1299' },
-      { name: 'Mutton Kebab Burger', price: '₹250', description: 'A juicy mutton kebab patty with mint chutney.', imgSrc: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?q=80&w=1470' },
-      { name: 'Double Cheese Burger', price: '₹280', description: 'Two layers of cheese and patty for the extra hungry.', imgSrc: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=1287' },
+      { name: 'Veg burger', price: '₹90', imgSrc: 'images/burger_1.png' },
+      { name: 'Paneer burger', price: '₹150', imgSrc: 'images/burger_2.png' },
+      { name: 'Chicken burger', price: '₹200', imgSrc: 'images/burger_3.png' },
+      { name: 'Egg burger', price: '₹250', imgSrc: 'images/burger_4.png' },
     ]
   },
   rolls: {
     name: 'Rolls',
     icon: FaUtensils,
     items: [
-      { name: 'Paneer Tikka Roll', price: '₹160', description: 'Smoky paneer tikka wrapped in a soft paratha.', imgSrc: 'https://images.unsplash.com/photo-1605596347314-b9152b1b3aab?q=80&w=1470' },
-      { name: 'Chicken Seekh Roll', price: '₹190', description: 'Juicy chicken seekh kebabs with mint chutney.', imgSrc: 'https://images.unsplash.com/photo-1625220194771-7ebdea0d0270?q=80&w=1470' },
-      { name: 'Mutton Boti Roll', price: '₹240', description: 'Tender mutton boti pieces in a flaky wrap.', imgSrc: 'https://images.unsplash.com/photo-1619822648742-b883a07538a2?q=80&w=1470' },
-      { name: 'Veggie Delight Roll', price: '₹130', description: 'A mix of fresh, crunchy vegetables and sauces.', imgSrc: 'https://images.unsplash.com/photo-1631110292398-8a4b4550066d?q=80&w=1334' },
+      { name: 'Chicken egg roll', imgSrc: 'images/roll_chicken_egg.jpg' },
+      { name: 'Chicken roll', imgSrc: 'images/roll_chicken.jpg' },
+      { name: 'Egg roll', imgSrc: 'images/roll_egg.jpg' },
+      { name: 'Chai Cafeteria special roll', imgSrc: 'images/roll_special.jpg' },
     ]
   },
   beverages: {
     name: 'Beverages',
     icon: FaGlassMartini,
     items: [
-      { name: 'Masala Chai', price: '₹50', description: 'Our signature spiced tea, brewed to perfection.', imgSrc: 'https://images.unsplash.com/photo-1594582319362-282a524a1b02?q=80&w=1288' },
-      { name: 'Cold Coffee', price: '₹120', description: 'Rich, creamy, and cold. A perfect refresher.', imgSrc: 'https://images.unsplash.com/photo-1579953724395-a2283a7c64a6?q=80&w=1287' },
-      { name: 'Virgin Mojito', price: '₹140', description: 'A classic mocktail with fresh mint and zesty lime.', imgSrc: 'https://images.unsplash.com/photo-1551538850-096b759648b2?q=80&w=1287' },
-      { name: 'Iced Tea', price: '₹110', description: 'Chilled black tea with a hint of lemon.', imgSrc: 'https://images.unsplash.com/photo-1556745753-b2904692b3cd?q=80&w=1287' },
+      { name: 'Masala Chai', imgSrc: 'https://images.unsplash.com/photo-1594582319362-282a524a1b02?q=80&w=1288' },
+      { name: 'Cold Coffee', imgSrc: 'https://images.unsplash.com/photo-1579953724395-a2283a7c64a6?q=80&w=1287' },
+      { name: 'Virgin Mojito', imgSrc: 'https://images.unsplash.com/photo-1551538850-096b759648b2?q=80&w=1287' },
+      { name: 'Iced Tea', imgSrc: 'https://images.unsplash.com/photo-1556745753-b2904692b3cd?q=80&w=1287' },
     ]
   },
 };
@@ -130,7 +129,6 @@ const Menu = () => {
                         {hoveredItem ? (
                           <>
                             <h3 className="text-xl font-bold text-brand-primary">{hoveredItem.name}</h3>
-                            <p className="text-sm mt-1">{hoveredItem.description}</p>
                             <p className="text-lg font-bold mt-2">{hoveredItem.price}</p>
                             <button className="mt-3 bg-brand-secondary text-brand-text text-sm font-bold px-4 py-2 rounded-full">Add</button>
                           </>
