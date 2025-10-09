@@ -2,8 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPepperHot, FaGlassMartini, FaHamburger, FaUtensils } from 'react-icons/fa';
 
-// --- MENU DATA (using Unsplash Images) ---
-// (No changes to this part, it remains the same)
+// --- MENU DATA (No changes here) ---
 const menuData = {
   chowmein: {
     name: 'Chowmein',
@@ -51,125 +50,130 @@ const menuData = {
 const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [radius, setRadius] = useState(220); // State for the orbit radius
+  const [radius, setRadius] = useState(220);
 
   const activeCategory = selectedCategory ? menuData[selectedCategory] : null;
-  const orbitContainerRef = useRef(null); // Ref for the container div
+  const orbitContainerRef = useRef(null);
 
-  // This effect calculates the radius based on the container size
   useLayoutEffect(() => {
     if (orbitContainerRef.current) {
       const { width, height } = orbitContainerRef.current.getBoundingClientRect();
       const smallerDimension = Math.min(width, height);
-      // Calculate radius to be 40% of the container's smaller side, minus a little padding
       const newRadius = smallerDimension * 0.4 - 20;
-      setRadius(newRadius > 0 ? newRadius : 100); // Ensure radius is a positive number
+      setRadius(newRadius > 0 ? newRadius : 100);
     }
-  }, [selectedCategory]); // Re-calculate when a category is selected
+  }, [selectedCategory]);
 
   const getPosition = (index, total) => {
     const angle = (index / total) * 360;
-    // Use the dynamic radius from state
     const x = radius * Math.cos((angle - 90) * (Math.PI / 180));
     const y = radius * Math.sin((angle - 90) * (Math.PI / 180));
     return { x, y };
   };
 
   return (
-    // ---- FIX 1: Main container is now a flex column that fits the screen height ----
-    <div className="h-screen flex flex-col bg-brand-background text-brand-text overflow-hidden">
-      <div className="text-center pt-12 lg:pt-16 pb-6 flex-shrink-0">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-brand-primary">Discover Our Menu</h1>
-        <p className="mt-3 text-lg max-w-2xl mx-auto px-4">Click a category to begin your culinary journey.</p>
-      </div>
-
-      <div className="relative z-40 flex justify-center items-center gap-4 md:gap-8 py-4 flex-wrap flex-shrink-0">
-        {Object.keys(menuData).map(key => {
-          const category = menuData[key];
-          const Icon = category.icon;
-          return (
-            <motion.div
-              key={key}
-              layoutId={`category-container-${key}`}
-              onClick={() => setSelectedCategory(key)}
-              className="p-4 md:p-5 rounded-full bg-white shadow-lg cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              <Icon className="text-2xl md:text-3xl text-brand-primary" />
-            </motion.div>
-          );
-        })}
-      </div>
+    // ---- CHANGE 1: Added `relative` to the main container ----
+    <div className="relative h-screen flex flex-col bg-brand-background text-brand-text overflow-hidden">
       
-      {/* ---- FIX 2: This container now grows to fill available space ---- */}
-      <div ref={orbitContainerRef} className="relative w-full flex-grow">
-        <AnimatePresence>
-          {selectedCategory && activeCategory && (
-            <>
-              {/* Central Information Box (no changes needed here) */}
+      {/* ---- CHANGE 2: Added the gradient overlay div ---- */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(230,99,40,0.08)] via-[rgba(253,189,38,0.04)] to-transparent pointer-events-none"
+      />
+
+      {/* --- Rest of the content, wrapped in a relative div to ensure it sits above the gradient --- */}
+      <div className="relative z-10 flex flex-col flex-grow">
+        <div className="text-center pt-12 lg:pt-16 pb-6 flex-shrink-0">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-primary">Discover Our Menu</h1>
+          <p className="mt-3 text-lg max-w-2xl mx-auto px-4">Click a category to begin your culinary journey.</p>
+        </div>
+
+        <div className="z-40 flex justify-center items-center gap-4 md:gap-8 py-4 flex-wrap flex-shrink-0">
+          {Object.keys(menuData).map(key => {
+            const category = menuData[key];
+            const Icon = category.icon;
+            return (
               <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
+                key={key}
+                layoutId={`category-container-${key}`}
+                onClick={() => setSelectedCategory(key)}
+                className="p-4 md:p-5 rounded-full bg-white shadow-lg cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
-                <div className="w-64 h-64 bg-brand-background rounded-full flex items-center justify-center text-center">
-                  <AnimatePresence mode="wait">
+                <Icon className="text-2xl md:text-3xl text-brand-primary" />
+              </motion.div>
+            );
+          })}
+        </div>
+        
+        <div ref={orbitContainerRef} className="relative w-full flex-grow">
+          <AnimatePresence>
+            {selectedCategory && activeCategory && (
+              <>
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                >
+                  <div className="w-64 h-64 bg-brand-background/80 backdrop-blur-sm rounded-full flex items-center justify-center text-center">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={hoveredItem ? hoveredItem.name : 'category'}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-full px-4"
+                      >
+                        {hoveredItem ? (
+                          <>
+                            <h3 className="text-xl font-bold text-brand-primary">{hoveredItem.name}</h3>
+                            <p className="text-sm mt-1">{hoveredItem.description}</p>
+                            <p className="text-lg font-bold mt-2">{hoveredItem.price}</p>
+                            <button className="mt-3 bg-brand-secondary text-brand-text text-sm font-bold px-4 py-2 rounded-full">Add</button>
+                          </>
+                        ) : (
+                          <h2 className="text-3xl font-extrabold text-brand-primary">{activeCategory.name}</h2>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  layoutId={`category-container-${selectedCategory}`}
+                  onClick={() => setSelectedCategory(null)}
+                  className="absolute z-10 inset-0 flex items-center justify-center p-6 rounded-full bg-white shadow-xl cursor-pointer"
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                >
+                  <activeCategory.icon className="text-5xl text-brand-primary" />
+                </motion.div>
+
+                {activeCategory.items.map((item, index) => {
+                  const { x, y } = getPosition(index, activeCategory.items.length);
+                  return (
                     <motion.div
-                      key={hoveredItem ? hoveredItem.name : 'category'}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full px-4"
+                      key={item.name}
+                      className="absolute z-20 inset-0 flex items-center justify-center"
+                      style={{ margin: 'auto' }}
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1, x, y, transition: { type: 'spring', stiffness: 100, delay: index * 0.1 } }}
+                      exit={{ scale: 0, opacity: 0, x: 0, y: 0, transition: { duration: 0.3, delay: index * 0.05 } }}
+                      onHoverStart={() => setHoveredItem(item)}
+                      onHoverEnd={() => setHoveredItem(null)}
                     >
-                      {hoveredItem ? (
-                        <>
-                          <h3 className="text-xl font-bold text-brand-primary">{hoveredItem.name}</h3>
-                          <p className="text-sm mt-1">{hoveredItem.description}</p>
-                          <p className="text-lg font-bold mt-2">{hoveredItem.price}</p>
-                          <button className="mt-3 bg-brand-secondary text-brand-text text-sm font-bold px-4 py-2 rounded-full">Add</button>
-                        </>
-                      ) : (
-                        <h2 className="text-3xl font-extrabold text-brand-primary">{activeCategory.name}</h2>
-                      )}
+                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg cursor-pointer border-4 border-white">
+                        <img src={item.imgSrc} alt={item.name} className="w-full h-full object-cover" />
+                      </div>
                     </motion.div>
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-
-              {/* Central Category Icon (no changes needed here) */}
-              <motion.div
-                layoutId={`category-container-${selectedCategory}`}
-                onClick={() => setSelectedCategory(null)}
-                className="absolute z-10 inset-0 flex items-center justify-center p-6 rounded-full bg-white shadow-xl cursor-pointer"
-                style={{ width: '120px', height: '120px', margin: 'auto' }}
-              >
-                <activeCategory.icon className="text-5xl text-brand-primary" />
-              </motion.div>
-
-              {/* Orbiting Items (now use dynamic radius) */}
-              {activeCategory.items.map((item, index) => {
-                const { x, y } = getPosition(index, activeCategory.items.length);
-                return (
-                  <motion.div
-                    key={item.name}
-                    className="absolute z-20 inset-0 flex items-center justify-center"
-                    style={{ margin: 'auto' }}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1, x, y, transition: { type: 'spring', stiffness: 100, delay: index * 0.1 } }}
-                    exit={{ scale: 0, opacity: 0, x: 0, y: 0, transition: { duration: 0.3, delay: index * 0.05 } }}
-                    onHoverStart={() => setHoveredItem(item)}
-                    onHoverEnd={() => setHoveredItem(null)}
-                  >
-                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg cursor-pointer border-4 border-white">
-                      <img src={item.imgSrc} alt={item.name} className="w-full h-full object-cover" />
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </>
-          )}
-        </AnimatePresence>
+                  );
+                })}
+              </>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );

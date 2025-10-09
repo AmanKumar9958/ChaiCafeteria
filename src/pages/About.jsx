@@ -104,9 +104,9 @@ const About = () => {
                             alt="Aman Kumar, Founder" 
                             className="w-32 h-32 rounded-full mx-auto shadow-lg object-cover"
                         />
-                        <h4 className="mt-4 text-xl font-semibold text-brand-primary">Aman Kumar</h4>
+                        <h4 className="mt-4 text-xl font-semibold text-brand-primary">Sachidanand Singh</h4>
                         <p className="mt-4 text-lg max-w-2xl mx-auto text-gray-700 italic">
-                            "I started Chai Cafeteria to share my love for simple, delicious food and the comforting ritual of a good cup of chai. It's a dream come true to see this place buzzing with happy faces. Welcome, and I hope you feel right at home."
+                            "Chai Cafeteria was started with a simple thought — to create a warm and welcoming space where people could relax, connect, and share conversations over a perfect cup of chai and delicious snacks. In the busy life of Ranchi, we wanted to bring back the charm of those small tea breaks that refresh both mind and heart. Our goal was to blend traditional flavors with a cozy modern vibe, offering a place where every sip of chai and every bite of snack feels like comfort and togetherness."
                         </p>
                     </motion.div>
                 </div>
