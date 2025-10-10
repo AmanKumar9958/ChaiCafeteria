@@ -115,9 +115,9 @@ const fadeInUp = {
             <h3 className="text-3xl font-bold mb-8 text-center text-brand-text">Popular at the Chai Cafeteria</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <FeaturedItemCard imgSrc="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=60&auto=format&fit=crop" title="Burger" description="Veg, Chicken, Egg & more" alt="burger"/>
-            <FeaturedItemCard imgSrc="/images/rolls.png" title="Roll" description="Paneer, Egg, Chicken & more" alt="rolls"/>
-            <FeaturedItemCard imgSrc="/images/thali.png" title="Thali" description="A complete, wholesome meal." alt="thali"/>
-            <FeaturedItemCard imgSrc="/images/beverages.png" title="Fresh Beverages" description="Chai, iced tea, cold brew & more." alt="beverage"/>
+            <FeaturedItemCard imgSrc="/images/rolls.webp" title="Roll" description="Paneer, Egg, Chicken & more" alt="rolls"/>
+            <FeaturedItemCard imgSrc="/images/thali.webp" title="Thali" description="A complete, wholesome meal." alt="thali"/>
+            <FeaturedItemCard imgSrc="/images/colddrinks.webp" title="Fresh Beverages" description="Chai, iced tea, cold brew & more." alt="beverage"/>
             <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex justify-center">
                 <Link to="/menu" className="border-2 bg-brand-primary text-black hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
                 More to eat
