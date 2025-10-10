@@ -1,180 +1,165 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaPepperHot, FaGlassMartini, FaHamburger, FaUtensils } from 'react-icons/fa';
 
-// --- MENU DATA (No changes here) ---
+// --- INLINE SVG ICONS (for stability) ---
+const ChilliIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10.394 2.086a2 2 0 00-2.788 0l-7 7a2 2 0 000 2.828l7 7a2 2 0 002.828 0l7-7a2 2 0 000-2.828l-7-7a2 2 0 00-.04-.04zM11 11.414V14a1 1 0 11-2 0v-2.586l-1.293-1.293a1 1 0 011.414-1.414L10 9.414l.879-.879a1 1 0 111.414 1.414L11 11.414z" />
+    </svg>
+);
+const BurgerIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 18a2 2 0 002-2v-1a1 1 0 00-1-1h-2a1 1 0 00-1 1v1a2 2 0 002 2zM5 6a2 2 0 012-2h6a2 2 0 012 2v1a2 2 0 01-2 2H7a2 2 0 01-2-2V6zm2 4a1 1 0 000 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+    </svg>
+);
+const RollsIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+        <path d="M4 7a2 2 0 012-2h8a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V7zm3 2a1 1 0 000 2h4a1 1 0 100-2H7z" />
+    </svg>
+);
+const BeveragesIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 6a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm2 2a1 1 0 000 2h4a1 1 0 100-2H6zm0 4a1 1 0 100 2h4a1 1 0 100-2H6z" clipRule="evenodd" />
+    </svg>
+);
+
+// --- MENU DATA ---
 const menuData = {
-  chilli: {
-    name: 'Chilli',
-    icon: FaPepperHot,
-    items: [
-      { name: 'Chicken chilli (bone)', imgSrc: 'images/chicken_chilli_bone.jpg' },
-      { name: 'Chicken chilli (boneless)', imgSrc: 'images/chicken_chilli_boneless.jpg' },
-      { name: 'Baby corn chilli', imgSrc: 'images/chilli_baby_corn.jpg' },
-      { name: 'Chilli Paneer', imgSrc: 'images/chilli_paneer.jpg' },
-    ]
-  },
-  burgers: {
-    name: 'Burgers',
-    icon: FaHamburger,
-    items: [
-      { name: 'Veg burger', price: '₹90', imgSrc: 'images/burger_1.png' },
-      { name: 'Paneer burger', price: '₹150', imgSrc: 'images/burger_2.png' },
-      { name: 'Chicken burger', price: '₹200', imgSrc: 'images/burger_3.png' },
-      { name: 'Egg burger', price: '₹250', imgSrc: 'images/burger_4.png' },
-    ]
-  },
-  rolls: {
-    name: 'Rolls',
-    icon: FaUtensils,
-    items: [
-      { name: 'Chicken egg roll', imgSrc: 'images/roll_chicken_egg.jpg' },
-      { name: 'Chicken roll', imgSrc: 'images/roll_chicken.jpg' },
-      { name: 'Egg roll', imgSrc: 'images/roll_egg.jpg' },
-      { name: 'Chai Cafeteria special roll', imgSrc: 'images/roll_special.jpg' },
-    ]
-  },
-  beverages: {
-    name: 'Beverages',
-    icon: FaGlassMartini,
-    items: [
-      { name: 'Masala Chai', imgSrc: 'https://images.unsplash.com/photo-1594582319362-282a524a1b02?q=80&w=1288' },
-      { name: 'Cold Coffee', imgSrc: 'https://images.unsplash.com/photo-1579953724395-a2283a7c64a6?q=80&w=1287' },
-      { name: 'Virgin Mojito', imgSrc: 'https://images.unsplash.com/photo-1551538850-096b759648b2?q=80&w=1287' },
-      { name: 'Iced Tea', imgSrc: 'https://images.unsplash.com/photo-1556745753-b2904692b3cd?q=80&w=1287' },
-    ]
-  },
+    chilli: {
+        name: 'Chilli',
+        icon: ChilliIcon,
+        items: [
+            { name: 'Chicken Chilli (Bone)', price: '₹220', imgSrc: 'https://images.unsplash.com/photo-1599305459344-96918b21d582?w=500' },
+            { name: 'Chicken Chilli (Boneless)', price: '₹250', imgSrc: 'https://images.unsplash.com/photo-1565299585323-21d1d27995f3?w=500' },
+            { name: 'Baby Corn Chilli', price: '₹180', imgSrc: 'https://images.unsplash.com/photo-1606491093925-58f1f725a533?w=500' },
+            { name: 'Chilli Paneer', price: '₹200', imgSrc: 'https://images.unsplash.com/photo-1567188042792-23b034a73a38?w=500' },
+        ]
+    },
+    burgers: {
+        name: 'Burgers',
+        icon: BurgerIcon,
+        items: [
+            { name: 'Veg Burger', price: '₹90', imgSrc: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500' },
+            { name: 'Paneer Burger', price: '₹150', imgSrc: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500' },
+            { name: 'Chicken Burger', price: '₹200', imgSrc: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500' },
+            { name: 'Egg Burger', price: '₹120', imgSrc: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?w=500' },
+        ]
+    },
+    rolls: {
+        name: 'Rolls',
+        icon: RollsIcon,
+        items: [
+            { name: 'Chicken Egg Roll', price: '₹130', imgSrc: 'https://images.unsplash.com/photo-1625220194771-49bdd72545b6?w=500' },
+            { name: 'Chicken Roll', price: '₹110', imgSrc: 'https://images.unsplash.com/photo-1608039755403-57c4b4a33215?w=500' },
+            { name: 'Egg Roll', price: '₹80', imgSrc: 'https://images.unsplash.com/photo-1628218903392-a61902803b9b?w=500' },
+            { name: 'Special Roll', price: '₹160', imgSrc: 'https://images.unsplash.com/photo-1528735602780-2552fd46c766?w=500' },
+        ]
+    },
+    beverages: {
+        name: 'Beverages',
+        icon: BeveragesIcon,
+        items: [
+            { name: 'Masala Chai', price: '₹40', imgSrc: 'https://images.unsplash.com/photo-1594582319362-282a524a1b02?w=500' },
+            { name: 'Cold Coffee', price: '₹120', imgSrc: 'https://images.unsplash.com/photo-1579953724395-a2283a7c64a6?w=500' },
+            { name: 'Virgin Mojito', price: '₹150', imgSrc: 'https://images.unsplash.com/photo-1551538850-096b759648b2?w=500' },
+            { name: 'Iced Tea', price: '₹100', imgSrc: 'https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=500' },
+        ]
+    },
 };
 
+// --- MENU COMPONENT ---
 const Menu = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [hoveredItem, setHoveredItem] = useState(null);
-  const [radius, setRadius] = useState(220);
+    const [activeCategory, setActiveCategory] = useState(Object.keys(menuData)[0]);
 
-  const activeCategory = selectedCategory ? menuData[selectedCategory] : null;
-  const orbitContainerRef = useRef(null);
+    return (
+        <div className="relative min-h-screen bg-brand-background text-brand-text">
+            {/* --- Gradient overlay (same as Home page) --- */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[rgba(230,99,40,0.12)] via-[rgba(253,189,38,0.06)] to-transparent pointer-events-none" />
 
-  useLayoutEffect(() => {
-    if (orbitContainerRef.current) {
-      const { width, height } = orbitContainerRef.current.getBoundingClientRect();
-      const smallerDimension = Math.min(width, height);
-      const newRadius = smallerDimension * 0.4 - 20;
-      setRadius(newRadius > 0 ? newRadius : 100);
-    }
-  }, [selectedCategory]);
-
-  const getPosition = (index, total) => {
-    const angle = (index / total) * 360;
-    const x = radius * Math.cos((angle - 90) * (Math.PI / 180));
-    const y = radius * Math.sin((angle - 90) * (Math.PI / 180));
-    return { x, y };
-  };
-
-  return (
-    // ---- CHANGE 1: Added `relative` to the main container ----
-    <div className="relative h-screen flex flex-col bg-brand-background text-brand-text overflow-hidden">
-      
-      {/* ---- CHANGE 2: Added the gradient overlay div ---- */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(230,99,40,0.08)] via-[rgba(253,189,38,0.04)] to-transparent pointer-events-none"
-      />
-
-      {/* --- Rest of the content, wrapped in a relative div to ensure it sits above the gradient --- */}
-      <div className="relative z-10 flex flex-col flex-grow">
-        <div className="text-center pt-12 lg:pt-16 pb-6 flex-shrink-0">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-primary">Discover Our Menu</h1>
-          <p className="mt-3 text-lg max-w-2xl mx-auto px-4">Click a category to begin your culinary journey.</p>
-        </div>
-
-        <div className="z-40 flex justify-center items-center gap-4 md:gap-8 py-4 flex-wrap flex-shrink-0">
-          {Object.keys(menuData).map(key => {
-            const category = menuData[key];
-            const Icon = category.icon;
-            return (
-              <motion.div
-                key={key}
-                layoutId={`category-container-${key}`}
-                onClick={() => setSelectedCategory(key)}
-                className="p-4 md:p-5 rounded-full bg-white shadow-lg cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300"
-              >
-                <Icon className="text-2xl md:text-3xl text-brand-primary" />
-              </motion.div>
-            );
-          })}
-        </div>
-        
-        <div ref={orbitContainerRef} className="relative w-full flex-grow">
-          <AnimatePresence>
-            {selectedCategory && activeCategory && (
-              <>
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.5 }}
+            <div className="relative z-10 container mx-auto px-4 py-12">
+                {/* --- HEADER --- */}
+                <motion.div 
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
                 >
-                  <div className="w-64 h-64 bg-brand-background/80 backdrop-blur-sm rounded-full flex items-center justify-center text-center">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={hoveredItem ? hoveredItem.name : 'category'}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full px-4"
-                      >
-                        {hoveredItem ? (
-                          <>
-                            <h3 className="text-xl font-bold text-brand-primary">{hoveredItem.name}</h3>
-                            <p className="text-lg font-bold mt-2">{hoveredItem.price}</p>
-                            <button className="mt-3 bg-brand-secondary text-brand-text text-sm font-bold px-4 py-2 rounded-full">Add</button>
-                          </>
-                        ) : (
-                          <h2 className="text-3xl font-extrabold text-brand-primary">{activeCategory.name}</h2>
-                        )}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
+                    <h1 className="text-4xl md:text-6xl font-extrabold text-brand-primary">Our Menu</h1>
+                    <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                        Deliciously crafted, just for you. Explore our range of popular dishes and find your new favorite.
+                    </p>
                 </motion.div>
 
-                <motion.div
-                  layoutId={`category-container-${selectedCategory}`}
-                  onClick={() => setSelectedCategory(null)}
-                  className="absolute z-10 inset-0 flex items-center justify-center p-6 rounded-full bg-white shadow-xl cursor-pointer"
-                  style={{ width: '120px', height: '120px', margin: 'auto' }}
-                >
-                  <activeCategory.icon className="text-5xl text-brand-primary" />
-                </motion.div>
+                {/* --- CATEGORY TABS --- */}
+                <div className="flex justify-center flex-wrap gap-4 md:gap-6 mb-12">
+                    {Object.entries(menuData).map(([key, category]) => {
+                        const Icon = category.icon;
+                        const isActive = activeCategory === key;
+                        return (
+                            <motion.button
+                                key={key}
+                                onClick={() => setActiveCategory(key)}
+                                className={`hover:cursor-pointer relative flex items-center justify-center px-5 py-3 text-sm md:text-base font-bold rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-primary ${
+                                    isActive ? 'text-black bg-[#FBBE25]' : 'bg-white text-gray-700 hover:bg-gray-100'
+                                }`}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="active-pill"
+                                        className="absolute inset-0 bg-brand-primary rounded-full"
+                                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                    />
+                                )}
+                                <span className="relative z-10 flex items-center">
+                                    <Icon /> {category.name}
+                                </span>
+                            </motion.button>
+                        );
+                    })}
+                </div>
 
-                {activeCategory.items.map((item, index) => {
-                  const { x, y } = getPosition(index, activeCategory.items.length);
-                  return (
+                {/* --- MENU ITEMS GRID --- */}
+                <AnimatePresence mode="wait">
                     <motion.div
-                      key={item.name}
-                      className="absolute z-20 inset-0 flex items-center justify-center"
-                      style={{ margin: 'auto' }}
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1, x, y, transition: { type: 'spring', stiffness: 100, delay: index * 0.1 } }}
-                      exit={{ scale: 0, opacity: 0, x: 0, y: 0, transition: { duration: 0.3, delay: index * 0.05 } }}
-                      onHoverStart={() => setHoveredItem(item)}
-                      onHoverEnd={() => setHoveredItem(null)}
+                        key={activeCategory}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.4, ease: 'easeInOut' }}
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
                     >
-                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg cursor-pointer border-4 border-white">
-                        <img src={item.imgSrc} alt={item.name} className="w-full h-full object-cover" />
-                      </div>
+                        {menuData[activeCategory].items.map((item, index) => (
+                            <motion.div
+                                key={item.name}
+                                className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col group"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.3, delay: index * 0.05 }}
+                            >
+                                <div className="overflow-hidden h-56">
+                                    <img 
+                                        src={item.imgSrc} 
+                                        alt={item.name} 
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out" 
+                                    />
+                                </div>
+                                <div className="p-5 flex-grow flex flex-col">
+                                    <h3 className="text-xl font-bold text-brand-text mb-1">{item.name}</h3>
+                                    <p className="text-lg font-semibold text-brand-primary mb-4">{item.price}</p>
+                                    <button className="mt-auto w-full bg-brand-secondary text-black font-bold py-2 px-4 rounded-full hover:opacity-90 transition-opacity duration-300">
+                                        Add to Order
+                                    </button>
+                                </div>
+                            </motion.div>
+                        ))}
                     </motion.div>
-                  );
-                })}
-              </>
-            )}
-          </AnimatePresence>
+                </AnimatePresence>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Menu;

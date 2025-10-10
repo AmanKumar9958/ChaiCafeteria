@@ -2,6 +2,8 @@ import React from 'react';
 import { FaUtensils, FaCoffee } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { SiZomato } from "react-icons/si";
+import { SiSwiggy } from "react-icons/si";
 
 // A reusable animation variant for items that fade in and slide up
 const fadeInUp = {
@@ -56,7 +58,7 @@ const fadeInUp = {
                     className="mt-8 flex flex-col sm:flex-row gap-4"
                     variants={fadeInUp}
                 >
-                    <Link to="/menu" className="bg-brand-primary text-white hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
+                    <Link to="/menu" className="bg-brand-primary text-black hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
                     Explore Menu
                     </Link>
                     <Link to="/order-online" className="border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold hover:scale-105">
@@ -139,12 +141,11 @@ const fadeInUp = {
             <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="text-center sm:text-left">
                 <h4 className="text-2xl font-bold text-brand-primary">Hungry now?</h4>
-                <p className="text-brand-text mt-1">Order online or visit us in Delhi for a quick, delicious bite.</p>
+                <p className="text-brand-text mt-1">Order online or visit us for a quick, delicious bite.</p>
             </div>
-            <div>
-                <Link to="/order-online" className="bg-brand-primary text-black hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
-                Order Online
-                </Link>
+            <div className='flex items-center gap-2'>
+                <a href="https://www.zomato.com/ranchi/chai-cafeteria-hatia/order" target='_blank'><SiZomato className='text-7xl text-brand-primary mr-4 hover:scale-110 transition-all duration-200' /></a>
+                <a href="https://www.swiggy.com/city/ranchi/chai-cafeteria-blue-diamond-complex-hatia-rest953762" target='_blank'><SiSwiggy className='text-4xl text-brand-primary hover:scale-110 transition-all duration-200' /></a>
             </div>
             </div>
         </motion.section>
