@@ -91,7 +91,7 @@ const Contact = () => {
 
                         {/* Contact Form */}
                         <motion.div variants={fadeInUp}>
-                            <img src="images/waiter-in-a-restaurant.png" alt="Waiter" />
+                            <img src="/images/waiter-in-a-restaurant.png" alt="Waiter" />
                         </motion.div>
                     </div>
                 </motion.section>

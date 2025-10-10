@@ -70,7 +70,7 @@ const About = () => {
           {/* Image */}
           <motion.div variants={fadeInUp} className="w-full">
             <img 
-              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=500" 
+              src="/images/cafe_area.jpg" 
               alt="Cafe Interior" 
               className="rounded-2xl shadow-xl object-cover w-full h-full"
             />

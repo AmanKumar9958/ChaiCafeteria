@@ -1,6 +1,6 @@
 import AppLayout from './components/AppLayout.jsx'
 import Home from './pages/Home.jsx'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Contact from './pages/Contact.jsx'
 import About from './pages/About.jsx'
 import Menu from './pages/Menu.jsx'
@@ -10,8 +10,8 @@ import WhatsAppButton from './components/WhatsAppButton.jsx'
 
 const App = () => {
     return (
-        <BrowserRouter>
-        <ScrollToTop />
+        <>
+            <ScrollToTop />
             <Routes>
                 <Route element={<AppLayout />}>
                     <Route path='/' element={<Home />} />
@@ -22,7 +22,7 @@ const App = () => {
                 </Route>
             </Routes>
             <WhatsAppButton />
-        </BrowserRouter>
+        </>
     )
 }
 

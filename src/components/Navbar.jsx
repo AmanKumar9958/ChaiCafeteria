@@ -65,7 +65,7 @@ const Navbar = () => {
                     <div className="relative group">
                         <button
                             type="button"
-                            className="text-black font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:opacity-90 z-20 flex items-center gap-2"
+                            className="hover:cursor-pointer text-black font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:opacity-90 z-20 flex items-center gap-2"
                             style={{ backgroundColor: 'var(--color-brand-primary)' }}
                         >
                             Order Online

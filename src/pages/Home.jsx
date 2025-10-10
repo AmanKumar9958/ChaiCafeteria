@@ -58,11 +58,8 @@ const fadeInUp = {
                     className="mt-8 flex flex-col sm:flex-row gap-4"
                     variants={fadeInUp}
                 >
-                    <Link to="/menu" className="bg-brand-primary text-black hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
+                    <Link to="/menu" className="bg-brand-primary text-black border-2 hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
                     Explore Menu
-                    </Link>
-                    <Link to="/order-online" className="border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold hover:scale-105">
-                    Order Now
                     </Link>
                 </motion.div>
 
@@ -122,7 +119,7 @@ const fadeInUp = {
             <FeaturedItemCard imgSrc="/images/thali.png" title="Thali" description="A complete, wholesome meal." alt="thali"/>
             <FeaturedItemCard imgSrc="/images/beverages.png" title="Fresh Beverages" description="Chai, iced tea, cold brew & more." alt="beverage"/>
             <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex justify-center">
-                <Link to="/menu" className="bg-brand-primary text-black hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
+                <Link to="/menu" className="border-2 bg-brand-primary text-black hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
                 More to eat
                 </Link>
                 </div>

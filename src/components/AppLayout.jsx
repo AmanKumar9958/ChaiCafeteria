@@ -5,7 +5,8 @@ import Navbar from './Navbar.jsx'
 const AppLayout = () => (
     <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-1 px-3 mt-2">
+        {/* Add top padding so sticky navbar doesn't overlap content */}
+        <main className="flex-1 px-3 pt-4 md:pt-6">
         <Outlet />
         </main>
     </div>
