@@ -121,7 +121,7 @@ const About = () => {
                 alt="Sachidanand Singh, Founder" 
                 className="w-32 h-32 rounded-full mx-auto shadow-lg object-cover"
             />
-            <h4 className="mt-4 text-xl font-semibold text-brand-primary">Sachida Kumar Singh</h4>
+            <h4 className="mt-4 text-xl font-semibold text-brand-primary">Shri Sachida Kumar Singh</h4>
             <p className="mt-4 text-lg max-w-2xl mx-auto text-gray-700 italic">
                 "Chai Cafeteria was started with a simple thought — to create a warm and welcoming space where people could relax, connect, and share conversations over a perfect cup of chai and delicious snacks."
             </p>
@@ -149,7 +149,7 @@ const About = () => {
                         alt="Team Member One"
                         className="w-32 h-32 rounded-full mx-auto shadow-lg object-cover"
                     />
-                    <h4 className="mt-5 text-xl font-semibold text-brand-primary">Soni Kumari</h4>
+                    <h4 className="mt-5 text-xl font-semibold text-brand-primary">Mrs. Soni Kumari</h4>
                     <p className="mt-3 text-gray-700">
                         "Creating dishes that bring a smile to people's faces is my greatest joy. Every ingredient has a story, and I love telling it through our food."
                     </p>
@@ -162,7 +162,7 @@ const About = () => {
                         alt="Team Member Two"
                         className="w-32 h-32 rounded-full mx-auto shadow-lg object-cover"
                     />
-                    <h4 className="mt-5 text-xl font-semibold text-brand-primary">Nishant</h4>
+                    <h4 className="mt-5 text-xl font-semibold text-brand-primary">Mr. Nishant</h4>
                     <p className="mt-3 text-gray-700">
                         "For me, this cafe is all about the people. I strive to make sure every person who walks through our doors feels like a part of our family."
                     </p>

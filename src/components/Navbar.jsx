@@ -52,12 +52,12 @@ const Navbar = () => {
                     <NavLink to="/menu" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
                         style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
                     >Menu</NavLink>
-                    <NavLink to="/contact" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
-                        style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
-                    >Contact</NavLink>
                     <NavLink to="/gallery" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
                         style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
                     >Gallery</NavLink>
+                    <NavLink to="/contact" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
+                        style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
+                    >Contact</NavLink>
                 </div>
 
                 {/* Desktop Action Buttons with Dropdown */}
@@ -107,8 +107,8 @@ const Navbar = () => {
                     <Link to="/" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Home</Link>
                     <Link to="/about" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>About Us</Link>
                     <Link to="/menu" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Menu</Link>
-                    <Link to="/contact" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Contact</Link>
                     <Link to="/gallery" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Gallery</Link>
+                    <Link to="/contact" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Contact</Link>
                     
                     {/* Direct links for mobile for better UX */}
                     <div className="w-full pt-4 mt-4 border-t border-gray-300 flex flex-col items-center gap-4">

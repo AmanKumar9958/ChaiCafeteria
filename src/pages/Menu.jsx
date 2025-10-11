@@ -7,6 +7,8 @@ import { MdFastfood, MdRiceBowl, MdRamenDining, MdEmojiFoodBeverage } from 'reac
 import { LuSandwich } from "react-icons/lu";
 import { IoEggOutline, IoChevronDown, IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { CiFries } from "react-icons/ci";
+import { MdOutlineSoupKitchen } from "react-icons/md";
+import { GiMeal } from "react-icons/gi";
 
 // --- MENU DATA ---
 const categoryIcons = {
@@ -23,6 +25,8 @@ const categoryIcons = {
     sandwich: LuSandwich,
     egg: IoEggOutline,
     fries: CiFries,
+    soup: MdOutlineSoupKitchen,
+    thali: GiMeal,
 };
 
 const menuData = {
@@ -198,14 +202,37 @@ const menuData = {
             { name: 'Peri-Peri Fries', price: "₹89", imgSrc: '/images/peri_peri_fries.webp' },
         ]
     },
+    soup: {
+        name: 'Soup',
+        items: [
+            { name: 'Chicken Delight Soup', price: "₹89", imgSrc: '/images/chicken_soup.webp' },
+            { name: 'Creamy Chicken Soup', price: "₹99", imgSrc: '/images/creamy_chicken_soup.png' },
+            { name: 'Mushroom Soup', price: "₹69", imgSrc: '/images/mushroom_soup.webp' },
+            { name: 'Creamy Mushroom Soup', price: "₹79", imgSrc: '/images/creamy_mushroom_soup.webp' },
+            { name: 'Sweet Corn Soup', price: "₹49", imgSrc: '/images/sweet_corn_soup.webp' },
+            { name: 'Sweet Corn Vegetable Soup', price: "₹59", imgSrc: '/images/sweet_corn_vege_soup.webp' },
+            { name: 'Tomato Soup', price: "₹59", imgSrc: '/images/tomato_soup.webp' },
+            { name: 'Manchow Noodles', price: "₹69", imgSrc: '/images/manchow_noodles.png' },
+        ]
+    },
+    thali: {
+        name: 'Thali',
+        items: [
+            { name: 'Veg Thali', price: "₹139", imgSrc: '/images/thali_veg.png' },
+            { name: 'CS Thali', price: "₹199", imgSrc: '/images/thali_veg_cs.png' },
+            { name: 'Non Veg Thali', price: "₹189", imgSrc: '/images/thali_non_veg.png' },
+            { name: 'CS Non Veg Thali', price: "₹259", imgSrc: '/images/thali_non_veg_cs.png' },
+            { name: 'Egg Thali', price: "₹169", imgSrc: '/images/thali_egg.png' },
+            { name: 'CS Egg Thali', price: "₹239", imgSrc: '/images/thali_egg_cs.png' },
+        ]
+    },
 };
 
 // --- MENU COMPONENT ---
 const Menu = () => {
     const [activeCategory, setActiveCategory] = useState(Object.keys(menuData)[0]);
-    const [isMobile, setIsMobile] = useState(false);
     const [expanded, setExpanded] = useState(false);
-    const MOBILE_COLLAPSE_COUNT = 4;
+    const COLLAPSE_COUNT = 4;
     const catScrollRef = React.useRef(null);
 
     const scrollCats = (dir) => {
@@ -215,19 +242,10 @@ const Menu = () => {
         el.scrollBy({ left: dir * amount, behavior: 'smooth' });
     };
 
+    // Collapse again when switching category (all viewports)
     React.useEffect(() => {
-        const mql = window.matchMedia('(max-width: 767px)');
-        const onChange = (e) => setIsMobile(e.matches);
-        setIsMobile(mql.matches);
-        mql.addEventListener ? mql.addEventListener('change', onChange) : mql.addListener(onChange);
-        return () => {
-            mql.removeEventListener ? mql.removeEventListener('change', onChange) : mql.removeListener(onChange);
-        };
-    }, []);
-
-    React.useEffect(() => {
-        if (isMobile) setExpanded(false);
-    }, [activeCategory, isMobile]);
+        setExpanded(false);
+    }, [activeCategory]);
 
     return (
         <div className="relative min-h-screen bg-[#FFFBF2] text-[#333333]">
@@ -245,15 +263,15 @@ const Menu = () => {
                     </p>
                 </motion.div>
 
-                {/* --- CATEGORY TABS (slider on mobile) --- */}
+                {/* --- CATEGORY TABS (slider on all viewports) --- */}
                 <div className="relative mb-12">
-                    {/* Scrollable rail: NO z-index here. It's the bottom layer. */}
+                    {/* Scrollable rail: visible on all sizes */}
                     <div
                         ref={catScrollRef}
-                        className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-12 md:flex-wrap md:overflow-visible md:justify-center md:gap-6 md:px-0"
-                        style={{ scrollPaddingLeft: '3rem', scrollPaddingRight: '3rem' }}
+                        className="flex gap-3 overflow-x-auto scrollbar-none snap-x snap-mandatory px-16"
+                        style={{ scrollPaddingLeft: '4rem', scrollPaddingRight: '4rem' }}
                     >
-                        <div aria-hidden className="shrink-0 w-12 md:hidden" />
+                        <div aria-hidden className="shrink-0 w-16" />
                         {Object.entries(menuData).map(([key, category]) => {
                             const isActive = activeCategory === key;
                             const Icon = categoryIcons[key] || MdFastfood;
@@ -286,11 +304,11 @@ const Menu = () => {
                                 </motion.button>
                             );
                         })}
-                        <div aria-hidden className="shrink-0 w-12 md:hidden" />
+                        <div aria-hidden className="shrink-0 w-16" />
                     </div>
 
-                    {/* Mobile chevrons + edge fades container */}
-                    <div className="md:hidden pointer-events-none absolute inset-y-0 inset-x-0">
+                    {/* Chevrons + edge fades container (all sizes) */}
+                    <div className="pointer-events-none absolute inset-y-0 inset-x-0">
                         {/* Fades: z-20 (Top layer) */}
                         <div className="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-[#FFFBF2] to-transparent z-20" />
                         <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-[#FFFBF2] to-transparent z-20" />
@@ -315,6 +333,22 @@ const Menu = () => {
                     </div>
                 </div>
                 
+                {/* Collapse toggle (all viewports) */}
+                {menuData[activeCategory].items.length > COLLAPSE_COUNT && (
+                    <div className="flex justify-end mb-4">
+                        <button
+                            type="button"
+                            onClick={() => setExpanded((v) => !v)}
+                            className="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-full bg-white shadow border border-gray-200"
+                            aria-expanded={expanded}
+                            aria-controls="menu-items-grid"
+                        >
+                            <span>{expanded ? 'Show less' : `Show all (${menuData[activeCategory].items.length})`}</span>
+                            <IoChevronDown className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
+                        </button>
+                    </div>
+                )}
+
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeCategory}
@@ -323,27 +357,12 @@ const Menu = () => {
                         exit={{ opacity: 0, y: -30 }}
                         transition={{ duration: 0.4, ease: 'easeInOut' }}
                     >
-                        {isMobile && menuData[activeCategory].items.length > MOBILE_COLLAPSE_COUNT && (
-                            <div className="md:hidden flex justify-end mb-4">
-                                <button
-                                    type="button"
-                                    onClick={() => setExpanded((v) => !v)}
-                                    className="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-full bg-white shadow border border-gray-200"
-                                    aria-expanded={expanded}
-                                    aria-controls="menu-items-grid"
-                                >
-                                    <span>{expanded ? 'Show less' : `Show all (${menuData[activeCategory].items.length})`}</span>
-                                    <IoChevronDown className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
-                                </button>
-                            </div>
-                        )}
-                        
                         <div
                             id="menu-items-grid"
                             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
                         >
-                            {(isMobile && !expanded
-                                ? menuData[activeCategory].items.slice(0, MOBILE_COLLAPSE_COUNT)
+                            {(!expanded
+                                ? menuData[activeCategory].items.slice(0, COLLAPSE_COUNT)
                                 : menuData[activeCategory].items
                             ).map((item, index) => (
                                 <motion.div
@@ -361,7 +380,7 @@ const Menu = () => {
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
                                         />
                                     </div>
-                                    <div className="p-5 flex-grow flex flex-col">
+                                    <div className="p-5 flex-grow flex flex-row gap-2">
                                         <h3 className="text-xl font-bold text-[#333333] mb-2 flex-grow">{item.name}</h3>
                                         <p className="text-lg font-semibold text-[#E66328]">{item.price}</p>
                                     </div>

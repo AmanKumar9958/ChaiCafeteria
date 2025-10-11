@@ -17,6 +17,13 @@ const ClockIcon = () => (
         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clipRule="evenodd" />
     </svg>
 );
+const MailIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-primary mt-1" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M2.94 6.94a1.5 1.5 0 00-.44 1.06v6a1.5 1.5 0 001.5 1.5h12a1.5 1.5 0 001.5-1.5v-6a1.5 1.5 0 00-.44-1.06l-6.56 4.27a1.5 1.5 0 01-1.48 0L2.94 6.94z" />
+        <path d="M18 5H4a1.5 1.5 0
+            00-1.5 1.5v.638l8.132 5.3a3.5 3.5 0 003.736 0L19.5 7.138V6.5A1.5 1.5 0 0018 5z" />
+    </svg>
+);
 
 // --- Animation Variant ---
 const fadeInUp = {
@@ -79,11 +86,20 @@ const Contact = () => {
                                         </p>
                                     </div>
                                 </div>
+                                <div className="flex items-start gap-4">
+                                    <MailIcon />
+                                    <div>
+                                        <h4 className="font-semibold text-lg">Email</h4>
+                                        <p className="text-gray-600 hover:text-brand-primary transition-colors">
+                                            <a href="mailto:chaicafeteria99@gmail.com">chaicafeteria99@gmail.com</a>
+                                        </p>
+                                    </div>
+                                </div>
                                 <div className="flex items-start gap-4 border-t border-gray-200 pt-6 mt-6">
                                     <ClockIcon />
                                     <div>
                                         <h4 className="font-semibold text-lg">Opening Hours</h4>
-                                        <p className="text-gray-600">Monday - Sunday: 10:00 AM - 10:00 PM</p>
+                                        <p className="text-gray-600">Monday - Sunday: 10:00 AM - 02:30 AM</p>
                                     </div>
                                 </div>
                             </div>

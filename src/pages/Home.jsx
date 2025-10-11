@@ -49,7 +49,7 @@ const fadeInUp = {
                 {/* Left Content */}
                 <motion.div variants={fadeInUp}>
                 <p className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary bg-white/60 py-1 px-3 rounded-full shadow-sm">
-                    Open Daily: 10 AM - 2:30 AM
+                    Open Daily: 10:00 AM - 2:30 AM
                 </p>
                 <h1 className="mt-6 text-4xl md:text-6xl font-extrabold leading-tight text-brand-primary">
                     Savor the Taste — Burgers, Rolls & Fresh Beverages
