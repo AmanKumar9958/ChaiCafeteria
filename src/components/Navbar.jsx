@@ -46,12 +46,12 @@ const Navbar = () => {
                     <NavLink to="/" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
                         style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
                     >Home</NavLink>
-                    <NavLink to="/menu" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
-                        style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
-                    >Menu</NavLink>
                     <NavLink to="/about" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
                         style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
                     >About Us</NavLink>
+                    <NavLink to="/menu" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
+                        style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
+                    >Menu</NavLink>
                     <NavLink to="/contact" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
                         style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
                     >Contact</NavLink>
@@ -105,8 +105,8 @@ const Navbar = () => {
             <div className={`absolute top-full left-0 w-full md:hidden transition-transform duration-300 ease-in-out ${isMenuOpen ? 'block' : 'hidden'}`} style={{ backgroundColor: 'var(--color-brand-background, #FFF8F0)' }}>
                 <div className="flex flex-col items-center space-y-6 py-8 px-4">
                     <Link to="/" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Home</Link>
-                    <Link to="/menu" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Menu</Link>
                     <Link to="/about" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>About Us</Link>
+                    <Link to="/menu" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Menu</Link>
                     <Link to="/contact" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Contact</Link>
                     <Link to="/gallery" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Gallery</Link>
                     

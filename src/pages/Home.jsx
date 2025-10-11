@@ -27,14 +27,18 @@ const fadeInUp = {
 
     export default function Home() {
     return (
-        <div className="min-h-screen bg-brand-background text-brand-text">
+            <div className="min-h-screen bg-brand-background text-brand-text">
+            {/* Welcome Banner */}
+            
         {/* Hero Section */}
         <section className="relative overflow-hidden">
             {/* Subtle gradient overlay */}
             <div
             className="absolute inset-0 bg-gradient-to-b from-[rgba(230,99,40,0.12)] via-[rgba(253,189,38,0.06)] to-transparent pointer-events-none"
             />
-
+                <div className="bg-brand-primary/90 text-black text-center py-2 px-4 font-bold tracking-wide text-4xl">
+                    Welcome to Chai Cafeteria
+                </div>
             <div className="max-w-7xl mx-auto px-6 py-20 lg:py-32 relative z-10">
             <motion.div 
                 className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
@@ -45,7 +49,7 @@ const fadeInUp = {
                 {/* Left Content */}
                 <motion.div variants={fadeInUp}>
                 <p className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary bg-white/60 py-1 px-3 rounded-full shadow-sm">
-                    Open Daily: 9 AM - 2:30 PM
+                    Open Daily: 10 AM - 2:30 AM
                 </p>
                 <h1 className="mt-6 text-4xl md:text-6xl font-extrabold leading-tight text-brand-primary">
                     Savor the Taste — Burgers, Rolls & Fresh Beverages

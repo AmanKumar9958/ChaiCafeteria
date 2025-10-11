@@ -1,75 +1,111 @@
 import React, { useState } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaPepperHot, FaHamburger, FaCookieBite } from 'react-icons/fa';
+import { GiCupcake, GiFullPizza } from 'react-icons/gi';
+import { MdFastfood, MdRiceBowl, MdRamenDining, MdEmojiFoodBeverage } from 'react-icons/md';
+import { LuSandwich } from "react-icons/lu";
+import { IoEggOutline, IoChevronDown, IoChevronBack, IoChevronForward } from "react-icons/io5";
+import { CiFries } from "react-icons/ci";
 
 // --- MENU DATA ---
-// NOTE: The SVG icons have been replaced with image paths.
-// You should place your corresponding icon images in the `public/icons/` folder.
+const categoryIcons = {
+    chilli: FaPepperHot,
+    burgers: FaHamburger,
+    rolls: MdFastfood,
+    biryani: MdRiceBowl,
+    chowmein: MdRamenDining,
+    beverages: MdEmojiFoodBeverage,
+    beverages_2: MdEmojiFoodBeverage,
+    muffins: GiCupcake,
+    cookies: FaCookieBite,
+    pizza: GiFullPizza,
+    sandwich: LuSandwich,
+    egg: IoEggOutline,
+    fries: CiFries,
+};
+
 const menuData = {
     chilli: {
         name: 'Chilli',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🌶️', // Example: /icons/chilli.webp
         items: [
-            { name: 'Chicken Chilli (Bone)', imgSrc: '/images/chicken_chilli_bone.webp' },
-            { name: 'Chicken Chilli (Boneless)', imgSrc: '/images/chicken_chilli_boneless.webp' },
-            { name: 'Baby Corn Chilli', imgSrc: '/images/chilli_baby_corn.webp' },
-            { name: 'Chilli Paneer', imgSrc: '/images/chilli_paneer.webp' },
+            { name: 'Chilli Paneer', price: "H-₹89/ F-₹179", imgSrc: '/images/chilli_paneer.webp' },
+            { name: 'Potato Chilli', price: "₹69", imgSrc: '/images/chilli_potato.webp' },
+            { name: 'Mushroom Chilli', price: "H-₹99/ F-₹199", imgSrc: '/images/mushroom_chilli.webp' },
+            { name: 'Baby Corn Chilli', price: "H-₹89/ F-₹179", imgSrc: '/images/chilli_baby_corn.webp' },
+            { name: 'Soya Chilli', price: "H-₹79/ F-₹169", imgSrc: '/images/soya_chilli.webp' },
         ]
     },
     burgers: {
         name: 'Burgers',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🍔', // Example: /icons/burger.webp
         items: [
-            { name: 'Veg Burger', imgSrc: '/images/burger_4.webp' },
-            { name: 'Paneer Burger', imgSrc: '/images/burger_3.webp' },
-            { name: 'Chicken Burger', imgSrc: '/images/burger_2.webp' },
-            { name: 'Egg Burger', imgSrc: '/images/burger_1.webp' },
+            { name: 'Veg Burger', price: "₹79", imgSrc: '/images/burger_4.webp' },
+            { name: 'Veg Cheese Burger', price: "₹89", imgSrc: '/images/burger_veg_cheese.webp' },
+            { name: 'Paneer Burger', price: "₹109", imgSrc: '/images/burger_3.webp' },
+            { name: 'Paneer Cheese Burger', price: "₹119", imgSrc: '/images/burger_paneer_cheese.webp' },
+            { name: 'Chicken Burger', price: "₹119", imgSrc: '/images/burger_2.webp' },
+            { name: 'Egg Burger', price: "₹99", imgSrc: '/images/burger_1.webp' },
         ]
     },
     rolls: {
         name: 'Rolls',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🌯', // Example: /icons/rolls.webp
         items: [
-            { name: 'Paneer Roll', imgSrc: '/images/paneer_roll.webp' },
-            { name: 'Egg Chicken Roll', imgSrc: '/images/roll_chicken_egg.webp' },
-            { name: 'Chicken Roll', imgSrc: '/images/roll_chicken.webp' },
-            { name: 'Egg Roll', imgSrc: '/images/roll_egg.webp' },
-            { name: 'Special Roll', imgSrc: '/images/roll_special.webp' },
-            { name: 'Rolls', imgSrc: '/images/rolls.webp' },
+            { name: 'Paneer Roll', price: "₹69", imgSrc: '/images/paneer_roll.webp' },
+            { name: 'Egg Roll', price: "₹69", imgSrc: '/images/roll_egg.webp' },
+            { name: 'Double Egg Roll', price: "₹79", imgSrc: '/images/roll_special.webp' },
+            { name: 'Chicken Roll', price: "₹89", imgSrc: '/images/roll_chicken.webp' },
+            { name: 'Chicken Egg Roll', price: "₹99", imgSrc: '/images/roll_chicken_egg.webp' },
         ]
     },
     biryani: {
         name: 'Biryani',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🍚', // Example: /icons/biryani.webp
         items: [
-            { name: 'Paneer Mushroom Biryani', imgSrc: '/images/paneer_mushroom_biryani.webp' },
-            { name: 'Paneer Capsicum Biryani', imgSrc: '/images/paneer_capsicum_biryani.webp' },
+            { name: 'Paneer Mushroom', imgSrc: '/images/paneer_mushroom_biryani.webp' },
+            { name: 'Paneer Capsicum', imgSrc: '/images/paneer_capsicum_biryani.webp' },
             { name: 'Veg Biryani', imgSrc: '/images/veg_biryani.webp' },
         ]
     },
     chowmein: {
         name: 'Chowmein',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🍜', // Example: /icons/chowmein.webp
         items: [
-            { name: 'Veg Chowmein', imgSrc: '/images/veg_chowmein.webp' },
-            { name: 'Chicken Chowmein', imgSrc: '/images/Chicken_Chowmein.webp' },
-            { name: 'Mix Veg Chowmein', imgSrc: '/images/mix_veg_chowmein.webp' },
-            { name: 'Mix Non-Veg Chowmein', imgSrc: '/images/non_veg_mix_chowmein.webp' },
-            { name: 'Mushroom Chowmein', imgSrc: '/images/mushroom_chowmein.webp' },
+            { name: 'Veg Chowmein', price: "H-₹49/ F-₹89", imgSrc: '/images/veg_chowmein.webp' },
+            { name: 'Chicken Chowmein', price: "H-₹89/ F-₹169", imgSrc: '/images/Chicken_Chowmein.webp' },
+            { name: 'Egg Chowmein', price: "H-₹69/ F-₹129", imgSrc: '/images/egg_chowmein.webp' },
+            { name: 'Chicken Egg Chowmein', price: "H-₹99/ F-₹189", imgSrc: '/images/Chicken_Chowmein.webp' },
         ]
     },
     beverages: {
-        name: 'Beverages',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🥤', // Example: /icons/beverages.webp
+        name: 'Beverages (Summer Special)',
         items: [
-            { name: 'Masala Chai', imgSrc: '/images/tea.webp' },
-            { name: 'Cold Coffee', imgSrc: '/images/coffee.webp' },
-            { name: 'Mojito', imgSrc: '/images/mojito.webp' },
-            { name: 'Cold Drinks', imgSrc: '/images/colddrinks.webp' },
+            { name: 'Desi Drink (Sattu)', price: "₹39", imgSrc: '/images/sattu.webp' },
+            { name: 'Choice of Fresh Juice', price: "₹69-89", imgSrc: '/images/fresh_juice.webp' },
+            { name: 'Fresh Lassi', price: "₹69", imgSrc: '/images/lassi.webp' },
+            { name: 'Fresh Chhachh', price: "₹69", imgSrc: '/images/chhachh.webp' },
+            { name: 'Cold Coffee', price: "₹89", imgSrc: '/images/cold_coffee.webp' },
+            { name: 'Mango Lassi', price: "₹89", imgSrc: '/images/mango_lassi.webp' },
+            { name: 'Oreo/KitKat/Vanila Shake', price: "₹89", imgSrc: '/images/oreo_shake.webp' },
+            { name: 'Mango/Banana/Papaya Shake', price: "₹89", imgSrc: '/images/fruit_shake.webp' },
+            { name: 'Ice-cream (any flavour) Shake', price: "₹99", imgSrc: '/images/icecream_shake.webp' },
+            { name: 'Masala/Pudina Sikanji', price: "₹89", imgSrc: '/images/shikanji.webp' },
+            { name: 'W.melon/Grapes/Apple/Mango Mojito', price: "₹99", imgSrc: '/images/mojito.webp' },
+            { name: 'Blue Lagoon', price: "₹99", imgSrc: '/images/blue_lagoon.webp' },
+        ]
+    },
+    beverages_2: {
+        name: 'Beverages (Hot)',
+        items: [
+            { name: 'Khulhad Chai', price: "₹19", imgSrc: '/images/tea.webp' },
+            { name: 'Green Tea', price: "₹39", imgSrc: '/images/green_tea.webp' },
+            { name: 'Lemon Grass Tea', price: "₹29", imgSrc: '/images/lemon_grass.webp' },
+            { name: 'Coffee (S)', price: "₹15", imgSrc: '/images/coffee.webp' },
+            { name: 'Cafeteria Spl. Coffee', price: "₹29", imgSrc: '/images/coffee_2.webp' },
+            { name: 'Black Coffee', price: "₹25", imgSrc: '/images/black_coffee.webp' },
+            { name: 'Hot Chocolate', price: "₹69", imgSrc: '/images/hot_chocolate.webp' },
+            { name: 'Horlicks Milk', price: "₹69", imgSrc: '/images/horlicks_milk.png' },
         ]
     },
     muffins: {
         name: 'Muffins',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🧁', // Example: /icons/muffin.webp
         items: [
             { name: 'Walnut Brownie Muffin', imgSrc: '/images/walnut_brownie_muffins.webp' },
             { name: 'Pista Vanilla Muffin', imgSrc: '/images/pista_vanilla_muffins.webp' },
@@ -80,7 +116,6 @@ const menuData = {
     },
     cookies: {
         name: 'Cookies',
-        iconSrc: 'https://placehold.co/24x24/E66328/FFFFFF?text=🍪', // Example: /icons/cookies.webp
         items: [
             { name: 'Mangrella Cookies', imgSrc: '/images/mangrella_cookies.webp' },
             { name: 'Jam Treats Cookies', imgSrc: '/images/jam_treats_cookies.webp' },
@@ -91,19 +126,113 @@ const menuData = {
             { name: 'Butter Atta Cookies', imgSrc: '/images/butter_atta_cookies.webp' },
         ]
     },
+    pizza: {
+        name: 'Pizza',
+        items: [
+            { name: 'Customized Non-Veg. Pizza', price: '₹269', imgSrc: '/images/non_veg_pizza.webp' },
+            { name: 'Customized Veg. Pizza', price: '₹189', imgSrc: '/images/veg_pizza.webp' },
+            { name: 'Margherita Pizza', price: '₹129', imgSrc: '/images/margherita_pizza.webp' },
+            { name: 'Pasta Pizza', price: '₹149', imgSrc: '/images/pasta_pizza.webp' },
+            { name: 'Cheese Onion Pizza', price: '₹159', imgSrc: '/images/chesse_onion_pizza.webp' },
+            { name: 'Mushroom Pizza', price: '₹149', imgSrc: '/images/mushroom_pizza.webp' },
+            { name: 'Paneer Tikka Pizza', price: '₹159', imgSrc: '/images/paneer_tikka_pizza.webp' },
+            { name: 'Paneer Tandoori Pizza', price: '₹149', imgSrc: '/images/paneer_tandoori_pizza.webp' },
+            { name: 'Baby Corn Pizza', price: '₹149', imgSrc: '/images/baby_corn_pizza.webp' },
+            { name: 'Tomato Pizza', price: '₹149', imgSrc: '/images/tomato_pizza.webp' },
+            { name: 'Sweet Corn Pizza', price: '₹149', imgSrc: '/images/sweet_corn_pizza.webp' },
+            { name: 'Onion Capsicum Pizza', price: '₹179', imgSrc: '/images/onion_capsicum_pizza.webp' },
+            { name: 'Garden Special Pizza', price: '₹179', imgSrc: '/images/garden_special_pizza.webp' },
+            { name: 'Capsicum & Paneer Pizza', price: '₹179', imgSrc: '/images/paneer_capsicum_pizza.webp' },
+            { name: 'Capsicum Pizza', price: '₹149', imgSrc: '/images/capsicum_pizza.png' },
+            { name: 'Peper Barbeque Chi. Pizza', price: '₹169', imgSrc: '/images/paneer_bbq_pizza.webp' },
+            { name: 'Chicken Sausage Pizza', price: '₹179', imgSrc: '/images/chicken_sausage_pizza.webp' },
+            { name: 'Chicken Tikka Pizza', price: '₹179', imgSrc: '/images/chicken_tikka.webp' },
+            { name: 'Chicken Sweet Corn Pizza', price: '₹189', imgSrc: '/images/chicken_sweet_corn_pizza.webp' },
+            { name: 'Chicken Pepperoni Pizza', price: '₹179', imgSrc: '/images/chicken_pepperoni.webp' },
+            { name: 'Egg Pizza (Boiled)', price: '₹149', imgSrc: '/images/boiled_egg_pizza.png' },
+            { name: 'Fried Egg Pizza', price: '₹169', imgSrc: '/images/egg_pizza.webp' },
+            { name: 'Non-Veg. Loaded Pizza', price: '₹209', imgSrc: '/images/non_veg_loaded_pizza.webp' },
+            { name: 'Cafeteria Spl. Non-Veg. Pizza', price: '₹249', imgSrc: '/images/spl_non_veg_pizza.webp' },
+            { name: 'Extra Cheese', price: '₹30', imgSrc: '/images/extra_cheese.webp' },
+        ],
+    },
+    sandwich: {
+        name: 'Sandwiches',
+        items: [
+            { name: 'Chicken Sandwich', price: "₹129", imgSrc: '/images/chicken_sand.webp' },
+            { name: 'Chicken Cheese Sandwich', price: "₹139", imgSrc: '/images/chicken_cheese_sand.webp' },
+            { name: 'Egg Sandwich (Fried/Boiled)', price: "₹119/₹129", imgSrc: '/images/egg_sand.webp' },
+            { name: 'Egg Cheese Sandwich', price: "₹129/₹149", imgSrc: '/images/egg_cheese_sand.webp' },
+            { name: 'Cafeteria Spl. Paneer Sandwich', price: "₹49", imgSrc: '/images/paneer_sand.webp' },
+            { name: 'Potato Sandwich', price: "₹119", imgSrc: '/images/potato_sand.webp' },
+            { name: 'Paneer Haryali Sandwich', price: "₹109", imgSrc: '/images/hariyali_sand.png' },
+            { name: 'Mushroom Sandwich', price: "₹109", imgSrc: '/images/mushroom_sand.webp' },
+            { name: 'Paneer Tikka Sandwich', price: "₹89", imgSrc: '/images/paneer_tikka_sand.webp' },
+            { name: 'Cheese Corn Sandwich', price: "₹79", imgSrc: '/images/cheese_corn_sand.webp' },
+            { name: 'Pizza Sandwich', price: "₹79", imgSrc: '/images/pizza_sand.webp' },
+            { name: 'Cheese Grilled Sandwich', price: "₹59", imgSrc: '/images/cheese_grilled_sand.webp' },
+            { name: 'Veggie Grilled Sandwich', price: "₹20", imgSrc: '/images/veggie_grilled_sand.webp' },
+        ]
+    },
+    egg: {
+        name: 'Egg Items',
+        items: [
+            { name: 'Boiled Egg (2 Pcs.)', price: "₹39", imgSrc: '/images/boiled_egg.webp' },
+            { name: 'Omelette (2 Pcs.)', price: "₹39", imgSrc: '/images/omelette.webp' },
+            { name: 'Bread Omelette (Jumbo 2 Pcs.)', price: "₹69", imgSrc: '/images/bread_omelette.webp' },
+        ]
+    },
+    fries: {
+        name: 'Fries',
+        items: [
+            { name: 'Chicken Popcorn (8 Pcs.)', price: "₹99", imgSrc: '/images/chicken_popcorn.webp' },
+            { name: 'Chicken Nuggets (8 Pcs.)', price: "₹99", imgSrc: '/images/chicken_nuggets.webp' },
+            { name: 'Chilli Garlic Potato (10 Pcs.)', price: "₹89", imgSrc: '/images/chilli_garlic_potato.webp' },
+            { name: 'Onion Rings (5 Pcs.)', price: "₹49", imgSrc: '/images/onion_rings.webp' },
+            { name: 'Mixed Platter (10 Pcs.)', price: "₹139", imgSrc: '/images/mixed_platter.png' },
+            { name: 'Chicken Sausage Deep Fried (5 Pcs.)', price: "₹129", imgSrc: '/images/chicken_sausage_deep_fried.webp' },
+            { name: 'Chicken Sausage Steamed (5 Pcs.)', price: "₹119", imgSrc: '/images/chicken_sausage_steamed.webp' },
+            { name: 'Chicken Sausage Pan Fried (5 Pcs.)', price: "₹139", imgSrc: '/images/chicken_sausage_pan_fried.webp' },
+            { name: 'French Fries', price: "₹79", imgSrc: '/images/french_fries.webp' },
+            { name: 'Cheese French Fries', price: "₹89", imgSrc: '/images/cheese_french_fries.webp' },
+            { name: 'Peri-Peri Fries', price: "₹89", imgSrc: '/images/peri_peri_fries.webp' },
+        ]
+    },
 };
 
 // --- MENU COMPONENT ---
 const Menu = () => {
     const [activeCategory, setActiveCategory] = useState(Object.keys(menuData)[0]);
+    const [isMobile, setIsMobile] = useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const MOBILE_COLLAPSE_COUNT = 4;
+    const catScrollRef = React.useRef(null);
+
+    const scrollCats = (dir) => {
+        const el = catScrollRef.current;
+        if (!el) return;
+        const amount = Math.floor((el.clientWidth || 280) * 0.9);
+        el.scrollBy({ left: dir * amount, behavior: 'smooth' });
+    };
+
+    React.useEffect(() => {
+        const mql = window.matchMedia('(max-width: 767px)');
+        const onChange = (e) => setIsMobile(e.matches);
+        setIsMobile(mql.matches);
+        mql.addEventListener ? mql.addEventListener('change', onChange) : mql.addListener(onChange);
+        return () => {
+            mql.removeEventListener ? mql.removeEventListener('change', onChange) : mql.removeListener(onChange);
+        };
+    }, []);
+
+    React.useEffect(() => {
+        if (isMobile) setExpanded(false);
+    }, [activeCategory, isMobile]);
 
     return (
         <div className="relative min-h-screen bg-[#FFFBF2] text-[#333333]">
-            {/* --- Gradient overlay --- */}
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(230,99,40,0.12)] via-[rgba(253,189,38,0.06)] to-transparent pointer-events-none" />
-
             <div className="relative z-10 container mx-auto px-4 py-12">
-                {/* --- HEADER --- */}
                 <motion.div
                     className="text-center mb-12"
                     initial={{ opacity: 0, y: -20 }}
@@ -116,37 +245,76 @@ const Menu = () => {
                     </p>
                 </motion.div>
 
-                {/* --- CATEGORY TABS --- */}
-                <div className="flex justify-center flex-wrap gap-4 md:gap-6 mb-12">
-                    {Object.entries(menuData).map(([key, category]) => {
-                        const isActive = activeCategory === key;
-                        return (
-                            <motion.button
-                                key={key}
-                                onClick={() => setActiveCategory(key)}
-                                className={`hover:cursor-pointer relative flex items-center justify-center px-5 py-3 text-sm md:text-base font-bold rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E66328] shadow-sm ${
-                                    isActive ? 'text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
-                                }`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="active-pill"
-                                        className="absolute inset-0 bg-[#FBBE25] rounded-full"
-                                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                    />
-                                )}
-                                <span className="relative z-10 flex items-center">
-                                    <img src={category.iconSrc} alt={`${category.name} icon`} className="w-6 h-6 mr-2 rounded-full" />
-                                    {category.name}
-                                </span>
-                            </motion.button>
-                        );
-                    })}
-                </div>
+                {/* --- CATEGORY TABS (slider on mobile) --- */}
+                <div className="relative mb-12">
+                    {/* Scrollable rail: NO z-index here. It's the bottom layer. */}
+                    <div
+                        ref={catScrollRef}
+                        className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-12 md:flex-wrap md:overflow-visible md:justify-center md:gap-6 md:px-0"
+                        style={{ scrollPaddingLeft: '3rem', scrollPaddingRight: '3rem' }}
+                    >
+                        <div aria-hidden className="shrink-0 w-12 md:hidden" />
+                        {Object.entries(menuData).map(([key, category]) => {
+                            const isActive = activeCategory === key;
+                            const Icon = categoryIcons[key] || MdFastfood;
+                            return (
+                                <motion.button
+                                    key={key}
+                                    onClick={() => setActiveCategory(key)}
+                                    className={`shrink-0 snap-start hover:cursor-pointer relative flex items-center justify-center px-5 py-3 text-sm md:text-base font-bold rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E66328] shadow-sm ${
+                                        isActive ? 'text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+                                    }`}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="active-pill"
+                                            className="absolute inset-0 bg-[#FBBE25] rounded-full"
+                                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
+                                    <span className="relative z-10 flex items-center whitespace-nowrap">
+                                        <span
+                                            className="mr-2 inline-flex items-center justify-center w-7 h-7 rounded-full"
+                                            style={{ backgroundColor: isActive ? '#E66328' : '#F2E6E0' }}
+                                        >
+                                            <Icon className="text-white" size={16} />
+                                        </span>
+                                        {category.name}
+                                    </span>
+                                </motion.button>
+                            );
+                        })}
+                        <div aria-hidden className="shrink-0 w-12 md:hidden" />
+                    </div>
 
-                {/* --- MENU ITEMS GRID --- */}
+                    {/* Mobile chevrons + edge fades container */}
+                    <div className="md:hidden pointer-events-none absolute inset-y-0 inset-x-0">
+                        {/* Fades: z-20 (Top layer) */}
+                        <div className="absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-[#FFFBF2] to-transparent z-20" />
+                        <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-[#FFFBF2] to-transparent z-20" />
+
+                        {/* Arrows: z-10 (Middle layer) */}
+                        <button
+                            type="button"
+                            onClick={() => scrollCats(-1)}
+                            className="pointer-events-auto absolute left-3 top-1/2 -translate-y-1/2 bg-[#E66328] text-white rounded-full shadow-lg p-2 ring-1 ring-white/80 z-10"
+                            aria-label="Scroll categories left"
+                        >
+                            <IoChevronBack size={20} />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => scrollCats(1)}
+                            className="pointer-events-auto absolute right-3 top-1/2 -translate-y-1/2 bg-[#E66328] text-white rounded-full shadow-lg p-2 ring-1 ring-white/80 z-10"
+                            aria-label="Scroll categories right"
+                        >
+                            <IoChevronForward size={20} />
+                        </button>
+                    </div>
+                </div>
+                
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeCategory}
@@ -154,29 +322,52 @@ const Menu = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -30 }}
                         transition={{ duration: 0.4, ease: 'easeInOut' }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
                     >
-                        {menuData[activeCategory].items.map((item, index) => (
-                            <motion.div
-                                key={item.name}
-                                className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col group"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.3, delay: index * 0.05 }}
-                            >
-                                <div className="overflow-hidden h-56">
-                                    <img
-                                        loading='lazy'
-                                        src={item.imgSrc}
-                                        alt={item.name}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                                    />
-                                </div>
-                                <div className="p-5 flex-grow flex flex-col">
-                                    <h3 className="text-xl font-bold text-[#333333] mb-1">{item.name}</h3>
-                                </div>
-                            </motion.div>
-                        ))}
+                        {isMobile && menuData[activeCategory].items.length > MOBILE_COLLAPSE_COUNT && (
+                            <div className="md:hidden flex justify-end mb-4">
+                                <button
+                                    type="button"
+                                    onClick={() => setExpanded((v) => !v)}
+                                    className="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-full bg-white shadow border border-gray-200"
+                                    aria-expanded={expanded}
+                                    aria-controls="menu-items-grid"
+                                >
+                                    <span>{expanded ? 'Show less' : `Show all (${menuData[activeCategory].items.length})`}</span>
+                                    <IoChevronDown className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
+                                </button>
+                            </div>
+                        )}
+                        
+                        <div
+                            id="menu-items-grid"
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                        >
+                            {(isMobile && !expanded
+                                ? menuData[activeCategory].items.slice(0, MOBILE_COLLAPSE_COUNT)
+                                : menuData[activeCategory].items
+                            ).map((item, index) => (
+                                <motion.div
+                                    key={item.name}
+                                    className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col group"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                                >
+                                    <div className="overflow-hidden h-44 md:h-48">
+                                        <img
+                                            loading='lazy'
+                                            src={item.imgSrc}
+                                            alt={item.name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                                        />
+                                    </div>
+                                    <div className="p-5 flex-grow flex flex-col">
+                                        <h3 className="text-xl font-bold text-[#333333] mb-2 flex-grow">{item.name}</h3>
+                                        <p className="text-lg font-semibold text-[#E66328]">{item.price}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
                     </motion.div>
                 </AnimatePresence>
             </div>

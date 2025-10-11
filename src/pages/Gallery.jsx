@@ -6,8 +6,13 @@ import img1 from "/images/cafe_1.webp";
 import img2 from "/images/cafe_2.webp";
 import img3 from "/images/cafe_3.webp";
 import img4 from "/images/cafe_4.webp";
+import img5 from "/images/menu_1.jpg";
+import img6 from "/images/menu_2.jpg";
+import img7 from "/images/menu_3.jpg";
+import img8 from "/images/opening.jpg";
+import img9 from "/images/pamplet_1.jpg";
 
-const images = [img1, img2, img3, img4];
+const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 
 // Animation Variants
 const fadeInUp = {
@@ -68,7 +73,7 @@ const Gallery = () => {
       {/* Full-Screen Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 cursor-pointer"
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-999 cursor-pointer"
           onClick={() => setSelectedImage(null)} // 👈 Close modal on click
         >
           <motion.img

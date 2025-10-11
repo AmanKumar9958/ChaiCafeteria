@@ -121,7 +121,7 @@ const About = () => {
                 alt="Sachidanand Singh, Founder" 
                 className="w-32 h-32 rounded-full mx-auto shadow-lg object-cover"
             />
-            <h4 className="mt-4 text-xl font-semibold text-brand-primary">Sachidanand Singh</h4>
+            <h4 className="mt-4 text-xl font-semibold text-brand-primary">Sachida Kumar Singh</h4>
             <p className="mt-4 text-lg max-w-2xl mx-auto text-gray-700 italic">
                 "Chai Cafeteria was started with a simple thought — to create a warm and welcoming space where people could relax, connect, and share conversations over a perfect cup of chai and delicious snacks."
             </p>
