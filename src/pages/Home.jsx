@@ -36,7 +36,7 @@ const fadeInUp = {
             <div
             className="absolute inset-0 bg-gradient-to-b from-[rgba(230,99,40,0.12)] via-[rgba(253,189,38,0.06)] to-transparent pointer-events-none"
             />
-                <div className="bg-brand-primary/90 text-black text-center py-2 px-4 font-bold tracking-wide text-4xl">
+                <div className="bg-brand-primary/90 text-black text-center py-1 px-4 font-bold tracking-wide text-4xl">
                     Welcome to Chai Cafeteria
                 </div>
             <div className="max-w-7xl mx-auto px-6 py-20 lg:py-32 relative z-10">

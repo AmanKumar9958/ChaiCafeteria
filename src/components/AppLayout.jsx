@@ -7,7 +7,7 @@ const AppLayout = () => (
     <div className="flex flex-col min-h-screen">
         <Navbar />
         {/* Add top padding so sticky navbar doesn't overlap content */}
-        <main className="flex-1 px-3 pt-4 md:pt-6">
+        <main className="flex-1 px-3 pt-4 md:pt-4">
         <Outlet />
         </main>
         <Footer />
