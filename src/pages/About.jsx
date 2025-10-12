@@ -167,6 +167,18 @@ const About = () => {
                         "For me, this cafe is all about the people. I strive to make sure every person who walks through our doors feels like a part of our family."
                     </p>
                 </motion.div>
+                {/* Team Member 2 */}
+                <motion.div variants={fadeInUp}>
+                    <img 
+                        src="/images/member_3.webp"
+                        alt="Team Member Three"
+                        className="w-32 h-32 rounded-full mx-auto shadow-lg object-cover"
+                    />
+                    <h4 className="mt-5 text-xl font-semibold text-brand-primary">Mr. Shubham</h4>
+                    <p className="mt-3 text-gray-700">
+                        "Every cup of chai we serve is made with love and care. I believe in the magic of a well-brewed tea to brighten someone's day."
+                    </p>
+                </motion.div>
             </div>
           </div>
       </motion.section>
