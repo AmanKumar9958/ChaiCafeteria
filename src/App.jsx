@@ -14,9 +14,6 @@ const About = lazy(() => import('./pages/About.jsx'));
 const Menu = lazy(() => import('./pages/Menu.jsx'));
 const Gallery = lazy(() => import('./pages/Gallery.jsx'));
 
-// --- Fallback Component ---
-// This simple component will be displayed while a lazy page is loading.
-// You can replace this with a more stylish spinner or skeleton loader.
 const LoadingFallback = () => (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'sans-serif' }}>
         <p>Loading...</p>
@@ -27,10 +24,6 @@ const App = () => {
     return (
         <>
             <ScrollToTop />
-            {/* The Suspense component wraps your routes. 
-              It will catch the loading state of any lazy component inside it
-              and display the 'fallback' UI until the component is ready.
-            */}
             <Suspense fallback={<LoadingFallback />}>
                 <Routes>
                     <Route element={<AppLayout />}>
