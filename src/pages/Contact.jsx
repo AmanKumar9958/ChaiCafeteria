@@ -82,7 +82,7 @@ const Contact = () => {
                                     <div>
                                         <h4 className="font-semibold text-lg">Phone</h4>
                                         <p className="text-gray-600 hover:text-brand-primary transition-colors">
-                                            <a href="tel:+919155354939">+91 9155354939</a>
+                                            <a href="tel:+919155354939">+91 9022791121 (Grievance Redressal / Complaint / Suggestion) WhatsApp only</a>
                                         </p>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@ const Contact = () => {
                                     <ClockIcon />
                                     <div>
                                         <h4 className="font-semibold text-lg">Opening Hours</h4>
-                                        <p className="text-gray-600">Monday - Sunday: 10:00 AM - 02:30 AM</p>
+                                        <p className="text-gray-600">Monday - Sunday: 09:00 AM - 02:30 AM</p>
                                     </div>
                                 </div>
                             </div>

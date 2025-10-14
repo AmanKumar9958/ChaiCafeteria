@@ -13,6 +13,8 @@ const Contact = lazy(() => import('./pages/Contact.jsx'));
 const About = lazy(() => import('./pages/About.jsx'));
 const Menu = lazy(() => import('./pages/Menu.jsx'));
 const Gallery = lazy(() => import('./pages/Gallery.jsx'));
+const MenuImages = lazy(() => import('./pages/MenuImages.jsx'));
+const Career = lazy(() => import('./pages/Career.jsx'));
 
 const LoadingFallback = () => (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'sans-serif' }}>
@@ -32,6 +34,8 @@ const App = () => {
                         <Route path='/contact' element={<Contact />} />
                         <Route path='/menu' element={<Menu />} />
                         <Route path='/gallery' element={<Gallery />} />
+                        <Route path='/menu-images' element={<MenuImages />} />
+                        <Route path='/career' element={<Career />} />
                     </Route>
                 </Routes>
             </Suspense>
@@ -40,4 +44,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default App;     

@@ -58,6 +58,9 @@ const Navbar = () => {
                     <NavLink to="/contact" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
                         style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
                     >Contact</NavLink>
+                    <NavLink to="/career" className={({ isActive }) => `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses}`}
+                        style={({ isActive }) => (isActive ? activeLinkStyle : undefined)}
+                    >Careers</NavLink>
                 </div>
 
                 {/* Desktop Action Buttons with Dropdown */}
@@ -109,6 +112,7 @@ const Navbar = () => {
                     <Link to="/menu" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Menu</Link>
                     <Link to="/gallery" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Gallery</Link>
                     <Link to="/contact" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Contact</Link>
+                    <Link to="/career" className="text-brand-text text-xl font-medium" onClick={handleLinkClick}>Careers</Link>
                     
                     {/* Direct links for mobile for better UX */}
                     <div className="w-full pt-4 mt-4 border-t border-gray-300 flex flex-col items-center gap-4">

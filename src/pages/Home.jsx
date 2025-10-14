@@ -1,11 +1,22 @@
 import React from 'react';
 import { FaUtensils, FaCoffee } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { SiZomato } from "react-icons/si";
 import { SiSwiggy } from "react-icons/si";
 
 // A reusable animation variant for items that fade in and slide up
+const MapMarkerIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-primary mt-1" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+    </svg>
+);
+const PhoneIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-primary mt-1" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+    </svg>
+);
 const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -139,15 +150,52 @@ const fadeInUp = {
             viewport={{ amount: 0.5 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div className="text-center sm:text-left">
-                    <h4 className="text-2xl font-bold text-brand-primary">Order online at Zomato or Swiggy — or visit our outlet to fresh your bed</h4>
-                    <p className="text-brand-text mt-2">Shop No. 106, Gr. Floor, Blue Diamond, Kachnartoli, Abdul Kalam Chowk, near Axis Bank, Singh More, Hesag, Ranchi, Jharkhand 834003, India</p>
-                    <p className="text-brand-text"><a href="tel:+919155354939" className="underline underline-offset-4 hover:text-brand-primary transition-colors">+91 9155354939</a></p>
-                </div>
-                <div className='flex items-center gap-2'>
-                    <a href="https://www.zomato.com/ranchi/chai-cafeteria-hatia/order" target='_blank' rel="noopener noreferrer"><SiZomato className='text-7xl text-brand-primary mr-4 hover:scale-110 transition-all duration-200' /></a>
-                    <a href="https://www.swiggy.com/city/ranchi/chai-cafeteria-blue-diamond-complex-hatia-rest953762" target='_blank' rel="noopener noreferrer"><SiSwiggy className='text-4xl text-brand-primary hover:scale-110 transition-all duration-200' /></a>
+            <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-black/5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    {/* Left: Copy and Details */}
+                    <div>
+                        <h4 className="text-2xl font-extrabold text-brand-primary leading-snug">
+                            Order online at Zomato or Swiggy — or visit our outlet to fresh your bed
+                        </h4>
+                        <div className="mt-4 space-y-3 text-brand-text">
+                            <div className="flex items-start gap-3">
+                                <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary"><FaMapMarkerAlt size={14} /></span>
+                                <p className="leading-relaxed">
+                                    Shop No. 106, Gr. Floor, Blue Diamond, Kachnartoli, Abdul Kalam Chowk, near Axis Bank, Singh More, Hesag, Ranchi, Jharkhand 834003, India
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary"><FaPhoneAlt size={12} /></span>
+                                <a href="tel:+919155354939" className="underline underline-offset-4 hover:text-brand-primary transition-colors">+91 9155354939</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right: Action Buttons */}
+                    <div className="flex md:justify-end">
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                            <a
+                                href="https://www.zomato.com/ranchi/chai-cafeteria-hatia/order"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full px-5 py-3 bg-[#E23747] text-white shadow hover:brightness-110 transition-transform duration-200 hover:scale-[1.02]"
+                                aria-label="Order on Zomato"
+                            >
+                                <SiZomato className="text-2xl" />
+                                <span className="font-semibold">Order on Zomato</span>
+                            </a>
+                            <a
+                                href="https://www.swiggy.com/city/ranchi/chai-cafeteria-blue-diamond-complex-hatia-rest953762"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full px-5 py-3 bg-[#FF5200] text-white shadow hover:brightness-110 transition-transform duration-200 hover:scale-[1.02]"
+                                aria-label="Order on Swiggy"
+                            >
+                                <SiSwiggy className="text-2xl" />
+                                <span className="font-semibold">Order on Swiggy</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </motion.section>

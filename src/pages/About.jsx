@@ -58,6 +58,52 @@ const About = () => {
         </div>
       </motion.section>
 
+          {/* Featured Menu Items on About */}
+          <motion.section 
+            className="max-w-7xl mx-auto px-6 py-16"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.2 }}
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-brand-text text-center mb-10">
+              Popular Picks from Our Menu
+            </motion.h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Burger */}
+              <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow p-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                <img src="/images/burger_4.webp" alt="Veg Burger" className="w-full h-40 object-cover rounded-md" />
+                <h4 className="mt-3 font-semibold text-brand-text">Veg Burger</h4>
+                <p className="text-sm text-gray-600">Classic, loaded and crispy</p>
+                <div className="mt-2 font-bold text-brand-primary">₹79</div>
+              </motion.div>
+              {/* Roll */}
+              <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow p-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                <img src="/images/rolls.webp" alt="Paneer Roll" className="w-full h-40 object-cover rounded-md" />
+                <h4 className="mt-3 font-semibold text-brand-text">Paneer Roll</h4>
+                <p className="text-sm text-gray-600">Soft, spicy and satisfying</p>
+                <div className="mt-2 font-bold text-brand-primary">₹69</div>
+              </motion.div>
+              {/* Pizza */}
+              <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow p-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                <img src="/images/margherita_pizza.webp" alt="Margherita Pizza" className="w-full h-40 object-cover rounded-md" />
+                <h4 className="mt-3 font-semibold text-brand-text">Margherita Pizza</h4>
+                <p className="text-sm text-gray-600">Cheesy and comforting</p>
+                <div className="mt-2 font-bold text-brand-primary">₹129</div>
+              </motion.div>
+              {/* Beverages */}
+              <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow p-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                <img src="/images/colddrinks.webp" alt="Fresh Beverages" className="w-full h-40 object-cover rounded-md" />
+                <h4 className="mt-3 font-semibold text-brand-text">Fresh Beverages</h4>
+                <p className="text-sm text-gray-600">Chai, iced tea, cold brew & more</p>
+                <div className="mt-2 font-bold text-brand-primary">From ₹15</div>
+              </motion.div>
+            </div>
+            <div className="mt-10 text-center">
+              <Link to="/menu" className="inline-block px-6 py-3 rounded-full bg-brand-primary text-black font-semibold shadow hover:bg-brand-secondary transition-colors">See full menu</Link>
+            </div>
+          </motion.section>
+
       {/* Our Philosophy Section */}
       <motion.section 
         className="max-w-7xl mx-auto px-6 py-16"
@@ -164,7 +210,7 @@ const About = () => {
                     />
                     <h4 className="mt-5 text-xl font-semibold text-brand-primary">Mr. Nishant</h4>
                     <p className="mt-3 text-gray-700">
-                        "For me, this cafe is all about the people. I strive to make sure every person who walks through our doors feels like a part of our family."
+                        "For me, this cafe is all about the people. I strive to make sure every person who walks through our outlet feels like a part of our family."
                     </p>
                 </motion.div>
                 {/* Team Member 2 */}

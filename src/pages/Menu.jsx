@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import QRCode from 'react-qr-code';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPepperHot, FaHamburger, FaCookieBite } from 'react-icons/fa';
@@ -234,6 +235,12 @@ const Menu = () => {
     const [expanded, setExpanded] = useState(false);
     const COLLAPSE_COUNT = 4;
     const catScrollRef = React.useRef(null);
+    const menuImagesUrl = React.useMemo(() => {
+        if (typeof window !== 'undefined') {
+            return `${window.location.origin}/menu-images`;
+        }
+        return '/menu-images';
+    }, []);
 
     const scrollCats = (dir) => {
         const el = catScrollRef.current;
@@ -262,6 +269,19 @@ const Menu = () => {
                         Deliciously crafted, just for you. Explore our range of popular dishes and find your new favorite.
                     </p>
                 </motion.div>
+
+                {/* --- QR: Scan to view menu images --- */}
+                <div className="mb-8 flex justify-center md:justify-center">
+                    <div className="flex items-center gap-4 bg-white rounded-2xl shadow p-4 border border-black/5">
+                        <div className="bg-white p-2 rounded-lg shadow">
+                            <QRCode value={menuImagesUrl} size={96} level="H" />
+                        </div>
+                        <div className="text-left">
+                            <div className="text-sm font-bold text-[#333333]">Scan to view Menu Images</div>
+                            <a href="/menu-images" className="text-sm text-brand-primary underline underline-offset-4">Open menu images</a>
+                        </div>
+                    </div>
+                </div>
 
                 {/* --- CATEGORY TABS (slider on all viewports) --- */}
                 <div className="relative mb-12">
