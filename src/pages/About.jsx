@@ -53,7 +53,7 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            In the busy life of Ranchi, we wanted to bring back the charm of those small tea breaks that refresh both mind and heart.
+            In the busy life of Ranchi, we wanted to bring back the charm of those small tea & coffee breaks that refresh both mind and heart.
           </motion.p>
         </div>
       </motion.section>
@@ -83,7 +83,7 @@ const About = () => {
                 <div className="bg-white rounded-full p-3 shadow-md mt-1"><LeafIcon /></div>
                 <div>
                   <h4 className="font-semibold text-lg">Freshness First</h4>
-                  <p className="text-gray-600">We believe great food starts with great ingredients. We source the freshest local produce to craft every single item on our menu.</p>
+                  <p className="text-gray-600">We believe great food starts with great ingredients. We source the fresh local produce to craft every single item on our menu.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
