@@ -49,13 +49,13 @@ const fadeInUp = {
                 {/* Left Content */}
                 <motion.div variants={fadeInUp}>
                 <p className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary bg-white/60 py-1 px-3 rounded-full shadow-sm">
-                    Open Daily: 10:00 AM - 2:30 AM
+                    Open Daily: 09:00 AM - 2:30 AM
                 </p>
                 <h1 className="mt-6 text-4xl md:text-6xl font-extrabold leading-tight text-brand-primary">
-                    Savor the Taste — Burgers, Rolls & Fresh Beverages
+                    Savor the Taste — Pizza, Burgers, Rolls, Chinese Cuisine & Fresh Beverages
                 </h1>
                 <p className="mt-6 text-lg text-brand-text max-w-xl">
-                    Cozy neighborhood café serving handcrafted burgers, warming chai, cold brews and everything in between. Fast service, friendly faces.
+                    Cozy neighborhood café serving handcrafted pizzas, burgers, rolls, Chinese cuisine, warming chai, cold brews and everything in between. Fast service, friendly faces.
                 </p>
 
                 <motion.div 
@@ -79,7 +79,7 @@ const fadeInUp = {
                     <div className="rounded-full p-3 bg-white shadow"><FaCoffee className="text-xl text-brand-secondary" /></div>
                     <div>
                         <div className="text-sm font-semibold">Specialty Drinks</div>
-                        <div className="text-sm text-gray-600">Chai, lattes and cold brews</div>
+                        <div className="text-sm text-gray-600">Chai and Coffee</div>
                     </div>
                     </div>
                 </motion.div>
@@ -140,14 +140,15 @@ const fadeInUp = {
             transition={{ duration: 0.5 }}
         >
             <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="text-center sm:text-left">
-                <h4 className="text-2xl font-bold text-brand-primary">Hungry now?</h4>
-                <p className="text-brand-text mt-1">Order online or visit us for a quick, delicious bite.</p>
-            </div>
-            <div className='flex items-center gap-2'>
-                <a href="https://www.zomato.com/ranchi/chai-cafeteria-hatia/order" target='_blank'><SiZomato className='text-7xl text-brand-primary mr-4 hover:scale-110 transition-all duration-200' /></a>
-                <a href="https://www.swiggy.com/city/ranchi/chai-cafeteria-blue-diamond-complex-hatia-rest953762" target='_blank'><SiSwiggy className='text-4xl text-brand-primary hover:scale-110 transition-all duration-200' /></a>
-            </div>
+                <div className="text-center sm:text-left">
+                    <h4 className="text-2xl font-bold text-brand-primary">Order online at Zomato or Swiggy — or visit our outlet to fresh your bed</h4>
+                    <p className="text-brand-text mt-2">Shop No. 106, Gr. Floor, Blue Diamond, Kachnartoli, Abdul Kalam Chowk, near Axis Bank, Singh More, Hesag, Ranchi, Jharkhand 834003, India</p>
+                    <p className="text-brand-text"><a href="tel:+919155354939" className="underline underline-offset-4 hover:text-brand-primary transition-colors">+91 9155354939</a></p>
+                </div>
+                <div className='flex items-center gap-2'>
+                    <a href="https://www.zomato.com/ranchi/chai-cafeteria-hatia/order" target='_blank' rel="noopener noreferrer"><SiZomato className='text-7xl text-brand-primary mr-4 hover:scale-110 transition-all duration-200' /></a>
+                    <a href="https://www.swiggy.com/city/ranchi/chai-cafeteria-blue-diamond-complex-hatia-rest953762" target='_blank' rel="noopener noreferrer"><SiSwiggy className='text-4xl text-brand-primary hover:scale-110 transition-all duration-200' /></a>
+                </div>
             </div>
         </motion.section>
         </div>
