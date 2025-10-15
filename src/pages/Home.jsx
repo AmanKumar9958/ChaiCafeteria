@@ -7,6 +7,8 @@ import { SiZomato } from "react-icons/si";
 import { SiSwiggy } from "react-icons/si";
 
 // A reusable animation variant for items that fade in and slide up
+// Hint linter: `motion` is used in JSX (<motion.div/>)
+void motion;
 const MapMarkerIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-primary mt-1" viewBox="0 0 20 20" fill="currentColor">
         <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -59,8 +61,17 @@ const fadeInUp = {
             >
                 {/* Left Content */}
                 <motion.div variants={fadeInUp}>
-                <p className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary bg-white/60 py-1 px-3 rounded-full shadow-sm">
-                    Open Daily: 09:00 AM - 2:30 AM
+                <p
+                    className="relative inline-flex items-center gap-3 text-[13px] sm:text-sm font-semibold text-black bg-white/80 supports-[backdrop-filter]:bg-white/60 backdrop-blur px-3.5 py-1.5 rounded-full shadow-md ring-1 ring-brand-primary/30"
+                    aria-label="Opening hours"
+                >
+                    {/* Live ping dot to draw attention */}
+                    <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-60"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-primary"></span>
+                    </span>
+                    <span className="uppercase tracking-wide text-[11px] sm:text-xs text-brand-text/70">Open Daily</span>
+                    <span className="font-extrabold text-[#E66328]">09:00 AM – 2:30 AM</span>
                 </p>
                 <h1 className="mt-6 text-4xl md:text-6xl font-extrabold leading-tight text-brand-primary">
                     Savor the Taste — Pizza, Burgers, Rolls, Chinese Cuisine & Fresh Beverages
@@ -129,9 +140,9 @@ const fadeInUp = {
         >
             <h3 className="text-3xl font-bold mb-8 text-center text-brand-text">Popular at the Chai Cafeteria</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <FeaturedItemCard imgSrc="/images/baby_corn_pizza.webp" title="Pizza" description="Pizza" alt="pizza"/>
             <FeaturedItemCard imgSrc="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=60&auto=format&fit=crop" title="Burger" description="Veg, Chicken, Egg & more" alt="burger"/>
             <FeaturedItemCard imgSrc="/images/rolls.webp" title="Roll" description="Paneer, Egg, Chicken & more" alt="rolls"/>
-            <FeaturedItemCard imgSrc="/images/thali.webp" title="Thali" description="A complete, wholesome meal." alt="thali"/>
             <FeaturedItemCard imgSrc="/images/colddrinks.webp" title="Fresh Beverages" description="Chai, iced tea, cold brew & more." alt="beverage"/>
             <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex justify-center">
                 <Link to="/menu" className="border-2 bg-brand-primary text-black hover:bg-brand-secondary hover:text-brand-text transition-all duration-300 inline-block px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105">
