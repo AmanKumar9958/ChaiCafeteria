@@ -151,9 +151,9 @@ export default function Career() {
                     type="button"
                     onClick={handleUploadResume}
                     disabled={uploading}
-                    className="inline-flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-text px-5 py-2 shadow-sm hover:bg-brand-primary/10 transition-colors disabled:opacity-70"
+                    className="hover:cursor-pointer inline-flex items-center justify-center rounded-full border-2 border-brand-primary text-brand-text px-5 py-2 shadow-sm hover:bg-brand-primary/10 transition-colors disabled:opacity-70 text-red-500"
                   >
-                    {uploading ? 'Uploading…' : 'Upload Resume to Cloudinary'}
+                    {uploading ? 'Uploading…' : 'Upload Resume'}
                   </button>
                   {uploading && (
                     <span className="text-xs text-gray-600">{uploadPct}%</span>
@@ -210,7 +210,7 @@ export default function Career() {
                 className="hover:cursor-pointer inline-flex items-center justify-center rounded-full bg-brand-primary text-black font-semibold px-6 py-3 shadow hover:bg-brand-secondary transition-colors disabled:opacity-70"
                 title="Send via Web3Forms"
               >
-                {submitting ? 'Submitting…' : (accessKey ? 'Submit via Web3Forms' : 'Send via Email')}
+                {submitting ? 'Submitting…' : (accessKey ? 'Submit your application' : 'Send via Email')}
               </button>
               {!accessKey && (
                 <a href={mailto} className="underline text-sm">Open email app</a>
