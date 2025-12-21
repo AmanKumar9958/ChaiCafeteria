@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import QRCode from 'react-qr-code';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaPepperHot, FaHamburger, FaCookieBite } from 'react-icons/fa';
-import { GiCupcake, GiFullPizza } from 'react-icons/gi';
-import { MdFastfood, MdRiceBowl, MdRamenDining, MdEmojiFoodBeverage } from 'react-icons/md';
+import { FaPepperHot, FaHamburger, FaCookieBite, FaLeaf } from 'react-icons/fa';
+import { GiCupcake, GiFullPizza, GiDumpling, GiMeal, GiNoodles, GiFriedEggs } from 'react-icons/gi';
+import { MdFastfood, MdRiceBowl, MdRamenDining, MdEmojiFoodBeverage, MdOutlineSoupKitchen } from 'react-icons/md';
 import { LuSandwich } from "react-icons/lu";
 import { IoEggOutline, IoChevronDown, IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { CiFries } from "react-icons/ci";
-import { MdOutlineSoupKitchen } from "react-icons/md";
-import { GiMeal } from "react-icons/gi";
 
 // --- MENU DATA ---
 const categoryIcons = {
+    snacks: MdFastfood,
+    momos: GiDumpling,
+    pasta: GiNoodles, // New Category
     chilli: FaPepperHot,
     burgers: FaHamburger,
     rolls: MdFastfood,
-    biryani: MdRiceBowl,
+    shanghai: GiNoodles,
     chowmein: MdRamenDining,
+    rice: MdRiceBowl,
+    biryani: MdRiceBowl,
     beverages: MdEmojiFoodBeverage,
     beverages_2: MdEmojiFoodBeverage,
     muffins: GiCupcake,
@@ -26,40 +29,216 @@ const categoryIcons = {
     sandwich: LuSandwich,
     egg: IoEggOutline,
     fries: CiFries,
+    sprouts: FaLeaf,
     soup: MdOutlineSoupKitchen,
     thali: GiMeal,
 };
 
 const menuData = {
+    snacks: {
+        name: 'Snacks',
+        items: [
+            { name: 'Mini Kachauri + Ghughni', price: "₹39", imgSrc: '/images/kachauri_ghughni.webp' },
+            { name: 'Samosa', price: "₹9", imgSrc: '/images/samosa.webp' },
+            { name: 'Samosa Paw', price: "₹29", imgSrc: '/images/samosa_paw.webp' },
+            { name: 'Bada Paw', price: "₹29", imgSrc: '/images/bada_paw.webp' },
+            { name: 'Egg Paw', price: "₹39", imgSrc: '/images/egg_paw.webp' },
+            { name: 'Veg. Pakoda', price: "₹59", imgSrc: '/images/veg_pakoda.webp' },
+            { name: 'Paneer Pakoda', price: "₹89", imgSrc: '/images/paneer_pakoda.webp' },
+            { name: 'Bread Pakoda', price: "₹49", imgSrc: '/images/bread_pakoda.webp' },
+            { name: 'Onion Pakoda (6 Pcs.)', price: "₹69", imgSrc: '/images/onion_pakoda.webp' },
+            { name: 'Garlic Bread', price: "₹79", imgSrc: '/images/garlic_bread.webp' },
+            { name: 'Aalo Bonda', price: "₹29", imgSrc: '/images/aalo_bonda.webp' },
+            { name: 'Cheese Ball (8 Pcs.)', price: "₹69", imgSrc: '/images/cheese_ball.webp' },
+            { name: 'Poha of your Choice', price: "₹89", imgSrc: '/images/poha.webp' },
+            { name: 'Bread Poha', price: "₹99", imgSrc: '/images/bread_poha.webp' },
+            { name: 'Masala Sweet Corn', price: "₹89", imgSrc: '/images/masala_sweet_corn.webp' },
+            { name: 'Crispy Corn', price: "₹89", imgSrc: '/images/crispy_corn.webp' },
+            { name: 'Potato Chop', price: "₹59", imgSrc: '/images/potato_chop.webp' },
+            { name: 'Rotato Potato', price: "₹39", imgSrc: '/images/rotato_potato.webp' },
+            { name: 'Dahi Bada', price: "₹39", imgSrc: '/images/dahi_bada.webp' },
+        ]
+    },
+    pasta: {
+        name: 'Pasta & Maggie',
+        items: [
+            { name: 'Red Sauce Pasta', price: "₹119", imgSrc: '/images/red_sauce_pasta.webp' },
+            { name: 'Masala Sauce Pasta', price: "₹139", imgSrc: '/images/masala_pasta.webp' },
+            { name: 'White Sauce Pasta', price: "₹159", imgSrc: '/images/white_sauce_pasta.webp' },
+            { name: 'Maggie', price: "₹49", imgSrc: '/images/maggie.webp' },
+            { name: 'Veggie Masala Maggie', price: "₹59", imgSrc: '/images/veg_maggie.webp' },
+            { name: 'Veg. Cheese Masala Maggie', price: "₹79", imgSrc: '/images/cheese_maggie.webp' },
+            { name: 'Cheese Corn Maggie', price: "₹89", imgSrc: '/images/corn_maggie.webp' },
+            { name: 'Paneer Maggie', price: "₹89", imgSrc: '/images/paneer_maggie.webp' },
+            { name: 'Paneer Cheese Maggie', price: "₹109", imgSrc: '/images/paneer_cheese_maggie.webp' },
+            { name: 'Egg Maggie', price: "₹109", imgSrc: '/images/egg_maggie.webp' },
+            { name: 'Chicken Maggie', price: "₹139", imgSrc: '/images/chicken_maggie.webp' },
+            { name: 'Chicken Egg Maggie', price: "₹149", imgSrc: '/images/chicken_egg_maggie.webp' },
+        ]
+    },
+    momos: {
+        name: 'Momos',
+        items: [
+            { name: 'Veg Momos', price: "H-₹69/ F-₹129", imgSrc: '/images/veg_momos.webp' },
+            { name: 'Veg Fry Momos', price: "H-₹79/ F-₹139", imgSrc: '/images/veg_fry_momos.webp' },
+            { name: 'Veg Pan Fry Momos', price: "H-₹89/ F-₹149", imgSrc: '/images/veg_pan_fry_momos.webp' },
+            { name: 'Paneer Momos (6/12 pcs)', price: "H-₹89/ F-₹149", imgSrc: '/images/paneer_momos.webp' },
+            { name: 'Paneer Fried Momos (6/12 pcs)', price: "H-₹99/ F-₹189", imgSrc: '/images/paneer_fry_momos.webp' },
+            { name: 'Pan Fried Paneer Momos', price: "H-₹109/ F-₹149", imgSrc: '/images/paneer_pan_fry_momos.webp' },
+            { name: 'Chicken Momos', price: "H-₹89/ F-₹179", imgSrc: '/images/chicken_momos.webp' },
+            { name: 'Chicken Fry Momos', price: "H-₹99/ F-₹189", imgSrc: '/images/chicken_fry_momos.webp' },
+            { name: 'Chicken Pan Fry Momos', price: "H-₹109/ F-₹149", imgSrc: '/images/chicken_pan_fry_momos.webp' },
+        ]
+    },
     chilli: {
         name: 'Chilli',
         items: [
-            { name: 'Chilli Paneer', price: "H-₹89/ F-₹179", imgSrc: '/images/chilli_paneer.webp' },
-            { name: 'Potato Chilli', price: "₹69", imgSrc: '/images/chilli_potato.webp' },
-            { name: 'Mushroom Chilli', price: "H-₹99/ F-₹199", imgSrc: '/images/mushroom_chilli.webp' },
-            { name: 'Baby Corn Chilli', price: "H-₹89/ F-₹179", imgSrc: '/images/chilli_baby_corn.webp' },
-            { name: 'Soya Chilli', price: "H-₹79/ F-₹169", imgSrc: '/images/soya_chilli.webp' },
+            { name: 'Chana Chilli', price: "H-₹79/ F-₹139", imgSrc: '/images/chana_chilli.webp' },
+            { name: 'Veg Manchurian', price: "6pcs-₹69/ 12pcs-₹119", imgSrc: '/images/veg_manchurian.webp' },
+            { name: 'Chilli Paneer', price: "6pcs-₹79/ 12pcs-₹149", imgSrc: '/images/chilli_paneer.webp' },
+            { name: 'Potato Chilli', price: "H-₹79/ F-₹139", imgSrc: '/images/chilli_potato.webp' },
+            { name: 'Mushroom Chilli', price: "H-₹79/ F-₹139", imgSrc: '/images/mushroom_chilli.webp' },
+            { name: 'Baby Corn Chilli', price: "H-₹69/ F-₹129", imgSrc: '/images/chilli_baby_corn.webp' },
+            { name: 'Corn Chilli', price: "H-₹79/ F-₹139", imgSrc: '/images/corn_chilli.webp' },
+            { name: 'Bone Chilli', price: "6pcs-₹89/ 12pcs-₹179", imgSrc: '/images/bone_chilli.webp' },
+            { name: 'Boneless Chilli', price: "H-₹99/ F-₹189", imgSrc: '/images/boneless_chilli.webp' },
+            { name: 'Crispy Lollipop', price: "12pcs-₹99", imgSrc: '/images/crispy_lollipop.webp' },
         ]
     },
     burgers: {
         name: 'Burgers',
         items: [
-            { name: 'Veg Burger', price: "₹79", imgSrc: '/images/burger_4.webp' },
-            { name: 'Veg Cheese Burger', price: "₹89", imgSrc: '/images/burger_veg_cheese.webp' },
-            { name: 'Paneer Burger', price: "₹109", imgSrc: '/images/burger_3.webp' },
-            { name: 'Paneer Cheese Burger', price: "₹119", imgSrc: '/images/burger_paneer_cheese.webp' },
-            { name: 'Chicken Burger', price: "₹119", imgSrc: '/images/burger_2.webp' },
-            { name: 'Egg Burger', price: "₹99", imgSrc: '/images/burger_1.webp' },
+            { name: 'Veg Burger', price: "₹59", imgSrc: '/images/burger_4.webp' },
+            { name: 'Veg Cheese Burger', price: "₹69", imgSrc: '/images/burger_veg_cheese.webp' },
+            { name: 'Paneer Burger', price: "₹89", imgSrc: '/images/burger_3.webp' },
+            { name: 'Paneer Cheese Burger', price: "₹99", imgSrc: '/images/burger_paneer_cheese.webp' },
+            { name: 'Chicken Burger', price: "₹99", imgSrc: '/images/burger_2.webp' },
+            { name: 'Chicken Cheese Burger', price: "₹119", imgSrc: '/images/burger_chicken_cheese.webp' },
+            { name: 'Egg Burger', price: "₹69", imgSrc: '/images/burger_1.webp' },
+            { name: 'Egg Cheese Burger', price: "₹89", imgSrc: '/images/burger_egg_cheese.webp' },
         ]
     },
     rolls: {
         name: 'Rolls',
         items: [
+            { name: 'Veg Roll', price: "₹49", imgSrc: '/images/veg_roll.webp' },
             { name: 'Paneer Roll', price: "₹69", imgSrc: '/images/paneer_roll.webp' },
-            { name: 'Egg Roll', price: "₹69", imgSrc: '/images/roll_egg.webp' },
-            { name: 'Double Egg Roll', price: "₹79", imgSrc: '/images/roll_special.webp' },
+            { name: 'Mushroom Roll', price: "₹59", imgSrc: '/images/mushroom_roll.webp' },
+            { name: 'Veg Mix Roll', price: "₹79", imgSrc: '/images/veg_mix_roll.webp' },
+            { name: 'Egg Roll', price: "₹59", imgSrc: '/images/roll_egg.webp' },
             { name: 'Chicken Roll', price: "₹89", imgSrc: '/images/roll_chicken.webp' },
             { name: 'Chicken Egg Roll', price: "₹99", imgSrc: '/images/roll_chicken_egg.webp' },
+            { name: 'Double Egg Chicken Roll', price: "₹129", imgSrc: '/images/roll_special.webp' },
+            { name: 'Chilli Paratha (6pcs)', price: "H-₹89/ F-₹129", imgSrc: '/images/chilli_paratha.webp' },
+            { name: 'Chicken Chilli Paratha', price: "H-₹129/ F-₹149", imgSrc: '/images/chicken_chilli_paratha.webp' },
+        ]
+    },
+    pizza: {
+        name: 'Pizza',
+        items: [
+            { name: 'Customized Veg. Pizza', price: '₹189', imgSrc: '/images/veg_pizza.webp' },
+            { name: 'Margherita Pizza', price: '₹129', imgSrc: '/images/margherita_pizza.webp' },
+            { name: 'Pasta Pizza', price: '₹149', imgSrc: '/images/pasta_pizza.webp' },
+            { name: 'Cheese Onion Pizza', price: '₹159', imgSrc: '/images/chesse_onion_pizza.webp' },
+            { name: 'Mushroom Pizza', price: '₹149', imgSrc: '/images/mushroom_pizza.webp' },
+            { name: 'Paneer Tikka Pizza', price: '₹159', imgSrc: '/images/paneer_tikka_pizza.webp' },
+            { name: 'Paneer Tandoori Pizza', price: '₹149', imgSrc: '/images/paneer_tandoori_pizza.webp' },
+            { name: 'Baby Corn Pizza', price: '₹149', imgSrc: '/images/baby_corn_pizza.webp' },
+            { name: 'Tomato Pizza', price: '₹149', imgSrc: '/images/tomato_pizza.webp' },
+            { name: 'Sweet Corn Pizza', price: '₹149', imgSrc: '/images/sweet_corn_pizza.webp' },
+            { name: 'Onion Capsicum Pizza', price: '₹179', imgSrc: '/images/onion_capsicum_pizza.webp' },
+            { name: 'Garden Special Pizza', price: '₹179', imgSrc: '/images/garden_special_pizza.webp' },
+            { name: 'Capsicum & Paneer Pizza', price: '₹179', imgSrc: '/images/paneer_capsicum_pizza.webp' },
+            { name: 'Capsicum Pizza', price: '₹149', imgSrc: '/images/capsicum_pizza.png' },
+            { name: 'Peper Barbeque Chi. Pizza', price: '₹169', imgSrc: '/images/paneer_bbq_pizza.webp' },
+            { name: 'Chicken Sausage Pizza', price: '₹179', imgSrc: '/images/chicken_sausage_pizza.webp' },
+            { name: 'Chicken Tikka Pizza', price: '₹179', imgSrc: '/images/chicken_tikka.webp' },
+            { name: 'Chicken Sweet Corn Pizza', price: '₹189', imgSrc: '/images/chicken_sweet_corn_pizza.webp' },
+            { name: 'Chicken Pepperoni Pizza', price: '₹179', imgSrc: '/images/chicken_pepperoni.webp' },
+            { name: 'Non-Veg. Loaded Pizza', price: '₹209', imgSrc: '/images/non_veg_loaded_pizza.webp' },
+            { name: 'Cafeteria Spl. Non-Veg. Pizza', price: '₹269', imgSrc: '/images/spl_non_veg_pizza.webp' },
+            { name: 'Customized Non-Veg. Pizza', price: '₹249', imgSrc: '/images/non_veg_pizza.webp' },
+            { name: 'Egg Pizza (Boiled)', price: '₹149', imgSrc: '/images/boiled_egg_pizza.png' },
+            { name: 'Fried Egg Pizza', price: '₹169', imgSrc: '/images/egg_pizza.webp' },
+            { name: 'Extra Cheese', price: '₹30', imgSrc: '/images/extra_cheese.webp' },
+        ],
+    },
+    sandwich: {
+        name: 'Sandwiches',
+        items: [
+            { name: 'Chicken Sandwich', price: "₹129", imgSrc: '/images/chicken_sand.webp' },
+            { name: 'Chicken Cheese Sandwich', price: "₹139", imgSrc: '/images/chicken_cheese_sand.webp' },
+            { name: 'Egg Sandwich (Fried/Boiled)', price: "₹99/₹89", imgSrc: '/images/egg_sand.webp' },
+            { name: 'Egg Cheese S/W (Fried/Boiled)', price: "₹129/₹119", imgSrc: '/images/egg_cheese_sand.webp' },
+            { name: 'Cafeteria Spl. Paneer Sandwich', price: "₹119", imgSrc: '/images/paneer_sand.webp' },
+            { name: 'Potato Sandwich', price: "₹49", imgSrc: '/images/potato_sand.webp' },
+            { name: 'Paneer Haryali Sandwich', price: "₹109", imgSrc: '/images/hariyali_sand.png' },
+            { name: 'Mushroom Sandwich', price: "₹109", imgSrc: '/images/mushroom_sand.webp' },
+            { name: 'Paneer Tikka Sandwich', price: "₹89", imgSrc: '/images/paneer_tikka_sand.webp' },
+            { name: 'Cheese Corn Sandwich', price: "₹79", imgSrc: '/images/cheese_corn_sand.webp' },
+            { name: 'Pizza Sandwich', price: "₹79", imgSrc: '/images/pizza_sand.webp' },
+            { name: 'Cheese Grilled Sandwich', price: "₹59", imgSrc: '/images/cheese_grilled_sand.webp' },
+            { name: 'Veggie Grilled Sandwich', price: "₹49", imgSrc: '/images/veggie_grilled_sand.webp' },
+            { name: 'Extra Dip', price: "₹20", imgSrc: '/images/dip.webp' },
+        ]
+    },
+    egg: {
+        name: 'Egg Items',
+        items: [
+            { name: 'Boiled Egg (2 Pcs.)', price: "₹29", imgSrc: '/images/boiled_egg.webp' },
+            { name: 'Omelette (2 Pcs.)', price: "₹39", imgSrc: '/images/omelette.webp' },
+            { name: 'Pouch (2 Pcs.)', price: "₹39", imgSrc: '/images/egg_pouch.webp' },
+            { name: 'Bread Omelette (Jumbo 2 Pcs.)', price: "₹49", imgSrc: '/images/bread_omelette.webp' },
+        ]
+    },
+    shanghai: {
+        name: 'Shanghai',
+        items: [
+            { name: 'Veg Shanghai', price: "H-₹79/ F-₹129", imgSrc: '/images/veg_shanghai.webp' },
+            { name: 'Paneer Shanghai', price: "H-₹89/ F-₹139", imgSrc: '/images/paneer_shanghai.webp' },
+            { name: 'Mushroom Shanghai', price: "H-₹89/ F-₹139", imgSrc: '/images/mushroom_shanghai.webp' },
+            { name: 'Veg Mix Shanghai', price: "H-₹99/ F-₹149", imgSrc: '/images/veg_mix_shanghai.webp' },
+            { name: 'Egg Shanghai', price: "H-₹79/ F-₹149", imgSrc: '/images/egg_shanghai.webp' },
+            { name: 'Chicken Shanghai', price: "H-₹99/ F-₹179", imgSrc: '/images/chicken_shanghai.webp' },
+            { name: 'Non-Veg Mix Shanghai', price: "H-₹119/ F-₹199", imgSrc: '/images/non_veg_mix_shanghai.webp' },
+        ]
+    },
+    chowmein: {
+        name: 'Chowmein',
+        items: [
+            { name: 'Veg Chowmein', price: "H-₹49/ F-₹89", imgSrc: '/images/veg_chowmein.webp' },
+            { name: 'Paneer Chowmein', price: "H-₹59/ F-₹99", imgSrc: '/images/paneer_chowmein.webp' },
+            { name: 'Mushroom Chowmein', price: "H-₹69/ F-₹109", imgSrc: '/images/mushroom_chowmein.webp' },
+            { name: 'Veg Mix Chowmein', price: "H-₹79/ F-₹119", imgSrc: '/images/veg_mix_chowmein.webp' },
+            { name: 'Egg Chowmein', price: "H-₹69/ F-₹129", imgSrc: '/images/egg_chowmein.webp' },
+            { name: 'Chicken Chowmein', price: "H-₹89/ F-₹169", imgSrc: '/images/Chicken_Chowmein.webp' },
+            { name: 'Mix Chowmein (Non-Veg)', price: "H-₹99/ F-₹189", imgSrc: '/images/mix_non_veg_chowmein.webp' },
+        ]
+    },
+    rice: {
+        name: 'Fried Rice',
+        items: [
+            { name: 'Veg Fried Rice', price: "H-₹69/ F-₹119", imgSrc: '/images/veg_fried_rice.webp' },
+            { name: 'Paneer Fried Rice', price: "H-₹79/ F-₹129", imgSrc: '/images/paneer_fried_rice.webp' },
+            { name: 'Mushroom Fried Rice', price: "H-₹79/ F-₹129", imgSrc: '/images/mushroom_fried_rice.webp' },
+            { name: 'Mix Veg Fried Rice', price: "H-₹89/ F-₹139", imgSrc: '/images/mix_veg_fried_rice.webp' },
+            { name: 'Egg Fried Rice', price: "H-₹79/ F-₹149", imgSrc: '/images/egg_fried_rice.webp' },
+            { name: 'Chicken Fried Rice', price: "H-₹89/ F-₹159", imgSrc: '/images/chicken_fried_rice.webp' },
+            { name: 'Chicken Egg Fried Rice', price: "H-₹99/ F-₹169", imgSrc: '/images/chicken_egg_fried_rice.webp' },
+        ]
+    },
+    sprouts: {
+        name: 'Sprouts',
+        items: [
+            { name: 'Mix Sprouts', price: "₹59", imgSrc: '/images/mix_sprouts.webp' },
+            { name: 'Mix Masala Sprouts', price: "₹79", imgSrc: '/images/mix_masala_sprouts.webp' },
+            { name: 'Steamed Mix Masala Sprouts', price: "₹99", imgSrc: '/images/steamed_mix_sprouts.webp' },
+            { name: 'Chana Sprouts', price: "₹39", imgSrc: '/images/chana_sprouts.webp' },
+            { name: 'Chana Masala Sprouts', price: "₹49", imgSrc: '/images/chana_masala_sprouts.webp' },
+            { name: 'Steamed Chana Masala Sprouts', price: "₹59", imgSrc: '/images/steamed_chana_sprouts.webp' },
+            { name: 'Chana Mong Sprouts', price: "₹49", imgSrc: '/images/chana_mong_sprouts.webp' },
+            { name: 'Chana Mong Masala Sprouts', price: "₹59", imgSrc: '/images/chana_mong_masala_sprouts.webp' },
+            { name: 'Make your own sprouts', price: "₹79", imgSrc: '/images/custom_sprouts.webp' },
         ]
     },
     biryani: {
@@ -70,17 +249,8 @@ const menuData = {
             { name: 'Veg Biryani', imgSrc: '/images/veg_biryani.webp' },
         ]
     },
-    chowmein: {
-        name: 'Chowmein',
-        items: [
-            { name: 'Veg Chowmein', price: "H-₹49/ F-₹89", imgSrc: '/images/veg_chowmein.webp' },
-            { name: 'Chicken Chowmein', price: "H-₹89/ F-₹169", imgSrc: '/images/Chicken_Chowmein.webp' },
-            { name: 'Egg Chowmein', price: "H-₹69/ F-₹129", imgSrc: '/images/egg_chowmein.webp' },
-            { name: 'Chicken Egg Chowmein', price: "H-₹99/ F-₹189", imgSrc: '/images/Chicken_Chowmein.webp' },
-        ]
-    },
     beverages: {
-        name: 'Beverages (Summer Special)',
+        name: 'Beverages (Summer)',
         items: [
             { name: 'Desi Drink (Sattu)', price: "₹39", imgSrc: '/images/sattu.webp' },
             { name: 'Choice of Fresh Juice', price: "₹69-89", imgSrc: '/images/fresh_juice.webp' },
@@ -92,7 +262,8 @@ const menuData = {
             { name: 'Mango/Banana/Papaya Shake', price: "₹89", imgSrc: '/images/fruit_shake.webp' },
             { name: 'Ice-cream (any flavour) Shake', price: "₹99", imgSrc: '/images/icecream_shake.webp' },
             { name: 'Masala/Pudina Sikanji', price: "₹89", imgSrc: '/images/shikanji.webp' },
-            { name: 'W.melon/Grapes/Apple/Mango Mojito', price: "₹99", imgSrc: '/images/mojito.webp' },
+            { name: 'W.melon/G.Apple/Mango Mojito', price: "₹99", imgSrc: '/images/mojito.webp' },
+            { name: 'Virgin Mojito', price: "₹79", imgSrc: '/images/virgin_mojito.webp' },
             { name: 'Blue Lagoon', price: "₹99", imgSrc: '/images/blue_lagoon.webp' },
         ]
     },
@@ -102,7 +273,7 @@ const menuData = {
             { name: 'Khulhad Chai', price: "₹19", imgSrc: '/images/tea.webp' },
             { name: 'Green Tea', price: "₹39", imgSrc: '/images/green_tea.webp' },
             { name: 'Lemon Grass Tea', price: "₹29", imgSrc: '/images/lemon_grass.webp' },
-            { name: 'Coffee (S)', price: "₹15", imgSrc: '/images/coffee.webp' },
+            { name: 'Coffee (S)', price: "₹19", imgSrc: '/images/coffee.webp' },
             { name: 'Cafeteria Spl. Coffee', price: "₹29", imgSrc: '/images/coffee_2.webp' },
             { name: 'Black Coffee', price: "₹25", imgSrc: '/images/black_coffee.webp' },
             { name: 'Hot Chocolate', price: "₹69", imgSrc: '/images/hot_chocolate.webp' },
@@ -131,69 +302,12 @@ const menuData = {
             { name: 'Butter Atta Cookies', imgSrc: '/images/butter_atta_cookies.webp' },
         ]
     },
-    pizza: {
-        name: 'Pizza',
-        items: [
-            { name: 'Customized Non-Veg. Pizza', price: '₹269', imgSrc: '/images/non_veg_pizza.webp' },
-            { name: 'Customized Veg. Pizza', price: '₹189', imgSrc: '/images/veg_pizza.webp' },
-            { name: 'Margherita Pizza', price: '₹129', imgSrc: '/images/margherita_pizza.webp' },
-            { name: 'Pasta Pizza', price: '₹149', imgSrc: '/images/pasta_pizza.webp' },
-            { name: 'Cheese Onion Pizza', price: '₹159', imgSrc: '/images/chesse_onion_pizza.webp' },
-            { name: 'Mushroom Pizza', price: '₹149', imgSrc: '/images/mushroom_pizza.webp' },
-            { name: 'Paneer Tikka Pizza', price: '₹159', imgSrc: '/images/paneer_tikka_pizza.webp' },
-            { name: 'Paneer Tandoori Pizza', price: '₹149', imgSrc: '/images/paneer_tandoori_pizza.webp' },
-            { name: 'Baby Corn Pizza', price: '₹149', imgSrc: '/images/baby_corn_pizza.webp' },
-            { name: 'Tomato Pizza', price: '₹149', imgSrc: '/images/tomato_pizza.webp' },
-            { name: 'Sweet Corn Pizza', price: '₹149', imgSrc: '/images/sweet_corn_pizza.webp' },
-            { name: 'Onion Capsicum Pizza', price: '₹179', imgSrc: '/images/onion_capsicum_pizza.webp' },
-            { name: 'Garden Special Pizza', price: '₹179', imgSrc: '/images/garden_special_pizza.webp' },
-            { name: 'Capsicum & Paneer Pizza', price: '₹179', imgSrc: '/images/paneer_capsicum_pizza.webp' },
-            { name: 'Capsicum Pizza', price: '₹149', imgSrc: '/images/capsicum_pizza.png' },
-            { name: 'Peper Barbeque Chi. Pizza', price: '₹169', imgSrc: '/images/paneer_bbq_pizza.webp' },
-            { name: 'Chicken Sausage Pizza', price: '₹179', imgSrc: '/images/chicken_sausage_pizza.webp' },
-            { name: 'Chicken Tikka Pizza', price: '₹179', imgSrc: '/images/chicken_tikka.webp' },
-            { name: 'Chicken Sweet Corn Pizza', price: '₹189', imgSrc: '/images/chicken_sweet_corn_pizza.webp' },
-            { name: 'Chicken Pepperoni Pizza', price: '₹179', imgSrc: '/images/chicken_pepperoni.webp' },
-            { name: 'Egg Pizza (Boiled)', price: '₹149', imgSrc: '/images/boiled_egg_pizza.png' },
-            { name: 'Fried Egg Pizza', price: '₹169', imgSrc: '/images/egg_pizza.webp' },
-            { name: 'Non-Veg. Loaded Pizza', price: '₹209', imgSrc: '/images/non_veg_loaded_pizza.webp' },
-            { name: 'Cafeteria Spl. Non-Veg. Pizza', price: '₹249', imgSrc: '/images/spl_non_veg_pizza.webp' },
-            { name: 'Extra Cheese', price: '₹30', imgSrc: '/images/extra_cheese.webp' },
-        ],
-    },
-    sandwich: {
-        name: 'Sandwiches',
-        items: [
-            { name: 'Chicken Sandwich', price: "₹129", imgSrc: '/images/chicken_sand.webp' },
-            { name: 'Chicken Cheese Sandwich', price: "₹139", imgSrc: '/images/chicken_cheese_sand.webp' },
-            { name: 'Egg Sandwich (Fried/Boiled)', price: "₹119/₹129", imgSrc: '/images/egg_sand.webp' },
-            { name: 'Egg Cheese Sandwich', price: "₹129/₹149", imgSrc: '/images/egg_cheese_sand.webp' },
-            { name: 'Cafeteria Spl. Paneer Sandwich', price: "₹49", imgSrc: '/images/paneer_sand.webp' },
-            { name: 'Potato Sandwich', price: "₹119", imgSrc: '/images/potato_sand.webp' },
-            { name: 'Paneer Haryali Sandwich', price: "₹109", imgSrc: '/images/hariyali_sand.png' },
-            { name: 'Mushroom Sandwich', price: "₹109", imgSrc: '/images/mushroom_sand.webp' },
-            { name: 'Paneer Tikka Sandwich', price: "₹89", imgSrc: '/images/paneer_tikka_sand.webp' },
-            { name: 'Cheese Corn Sandwich', price: "₹79", imgSrc: '/images/cheese_corn_sand.webp' },
-            { name: 'Pizza Sandwich', price: "₹79", imgSrc: '/images/pizza_sand.webp' },
-            { name: 'Cheese Grilled Sandwich', price: "₹59", imgSrc: '/images/cheese_grilled_sand.webp' },
-            { name: 'Veggie Grilled Sandwich', price: "₹20", imgSrc: '/images/veggie_grilled_sand.webp' },
-        ]
-    },
-    egg: {
-        name: 'Egg Items',
-        items: [
-            { name: 'Boiled Egg (2 Pcs.)', price: "₹39", imgSrc: '/images/boiled_egg.webp' },
-            { name: 'Omelette (2 Pcs.)', price: "₹39", imgSrc: '/images/omelette.webp' },
-            { name: 'Bread Omelette (Jumbo 2 Pcs.)', price: "₹69", imgSrc: '/images/bread_omelette.webp' },
-        ]
-    },
     fries: {
         name: 'Fries',
         items: [
-            { name: 'Chicken Popcorn (8 Pcs.)', price: "₹99", imgSrc: '/images/chicken_popcorn.webp' },
+            { name: 'Chicken Popcorn (10 Pcs.)', price: "₹99", imgSrc: '/images/chicken_popcorn.webp' },
             { name: 'Chicken Nuggets (8 Pcs.)', price: "₹99", imgSrc: '/images/chicken_nuggets.webp' },
             { name: 'Chilli Garlic Potato (10 Pcs.)', price: "₹89", imgSrc: '/images/chilli_garlic_potato.webp' },
-            { name: 'Onion Rings (5 Pcs.)', price: "₹49", imgSrc: '/images/onion_rings.webp' },
             { name: 'Mixed Platter (10 Pcs.)', price: "₹139", imgSrc: '/images/mixed_platter.png' },
             { name: 'Chicken Sausage Deep Fried (5 Pcs.)', price: "₹129", imgSrc: '/images/chicken_sausage_deep_fried.webp' },
             { name: 'Chicken Sausage Steamed (5 Pcs.)', price: "₹119", imgSrc: '/images/chicken_sausage_steamed.webp' },
@@ -210,7 +324,6 @@ const menuData = {
             { name: 'Creamy Chicken Soup', price: "₹99", imgSrc: '/images/creamy_chicken_soup.png' },
             { name: 'Mushroom Soup', price: "₹69", imgSrc: '/images/mushroom_soup.webp' },
             { name: 'Creamy Mushroom Soup', price: "₹79", imgSrc: '/images/creamy_mushroom_soup.webp' },
-            { name: 'Sweet Corn Soup', price: "₹49", imgSrc: '/images/sweet_corn_soup.webp' },
             { name: 'Sweet Corn Vegetable Soup', price: "₹59", imgSrc: '/images/sweet_corn_vege_soup.webp' },
             { name: 'Tomato Soup', price: "₹59", imgSrc: '/images/tomato_soup.webp' },
             { name: 'Manchow Noodles', price: "₹69", imgSrc: '/images/manchow_noodles.png' },
