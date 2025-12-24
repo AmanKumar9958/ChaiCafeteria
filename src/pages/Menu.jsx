@@ -434,7 +434,7 @@ const Menu = () => {
                                     key={key}
                                     onClick={() => setActiveCategory(key)}
                                     className={`shrink-0 snap-start hover:cursor-pointer relative flex items-center justify-center px-5 py-3 text-sm md:text-base font-bold rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E66328] shadow-sm ${
-                                        isActive ? 'text-white' : 'bg-white text-gray-700'
+                                        isActive ? 'text-white' : 'bg-whitenpm  text-gray-700'
                                     }`}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
