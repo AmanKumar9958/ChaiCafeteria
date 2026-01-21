@@ -66,34 +66,13 @@ const Navbar = () => {
                 {/* Desktop Action Buttons with Dropdown */}
                 <div className="hidden md:flex items-center space-x-4">
                     <div className="relative group">
-                        <button
-                            type="button"
+                        <a
                             className="hover:cursor-pointer text-black font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:opacity-90 z-20 flex items-center gap-2"
                             style={{ backgroundColor: 'var(--color-brand-primary)' }}
+                            href="https://play.google.com/store/apps/details?id=com.chaicafeteriaranchi.frontend"
                         >
-                            Order Online
-                            <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                        <div className="absolute hidden group-hover:block right-0 pt-2 w-48 bg-transparent">
-                            <div className="bg-white rounded-md shadow-lg px-1 py-1 z-50 ring-1 ring-black ring-opacity-5">
-                                <a
-                                    href="https://www.zomato.com/ranchi/chai-cafeteria-hatia/order"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="rounded-lg block px-4 py-2 text-sm text-gray-700 hover:bg-[#E23747] hover:text-white duration-200 transition-all"
-                                >
-                                    Zomato
-                                </a>
-                                <a
-                                    href="https://www.swiggy.com/city/ranchi/chai-cafeteria-blue-diamond-complex-hatia-rest953762"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="rounded-lg block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF5200] hover:text-white duration-200 transition-all"
-                                >
-                                    Swiggy
-                                </a>
-                            </div>
-                        </div>
+                            Download the App Now
+                        </a>
                     </div>
                 </div>
 
@@ -116,25 +95,15 @@ const Navbar = () => {
                     
                     {/* Direct links for mobile for better UX */}
                     <div className="w-full pt-4 mt-4 border-t border-gray-300 flex flex-col items-center gap-4">
-                         <a
-                            href="https://www.zomato.com/ranchi/chai-cafeteria-hatia/order"
+                        <a
+                            href="https://play.google.com/store/apps/details?id=com.chaicafeteriaranchi.frontend"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-black font-bold py-3 px-8 rounded-full shadow-lg text-lg hover:opacity-90 w-full max-w-xs text-center"
                             style={{ backgroundColor: '#E23747' }}
                             onClick={handleLinkClick}
                         >
-                            Order on Zomato
-                        </a>
-                        <a
-                            href="https://www.swiggy.com/city/ranchi/chai-cafeteria-blue-diamond-complex-hatia-rest953762"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-black font-bold py-3 px-8 rounded-full shadow-lg text-lg hover:opacity-90 w-full max-w-xs text-center"
-                            style={{ backgroundColor: '#FF5200' }}
-                            onClick={handleLinkClick}
-                        >
-                            Order on Swiggy
+                            Download the App Now
                         </a>
                     </div>
                 </div>
